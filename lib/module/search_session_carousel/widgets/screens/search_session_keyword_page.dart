@@ -52,6 +52,7 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
       widget.searchSession.phaseKeywordInfo.query = enteredKeyword;
       widget.searchSession.activePhase =
           SearchSessionPhaseEnum.phaseSearchResults;
+      widget.searchSession.sessionUpdateTime = DateTime.now();
       // Set the best phase to phaseSearchResults even if there are further phases before.
       // Any further phases will be not accessible.
       widget.searchSession.bestPhase =

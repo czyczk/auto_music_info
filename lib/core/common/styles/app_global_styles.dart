@@ -13,6 +13,18 @@ abstract class AppGlobalStyles {
   /// The height of the [SidebarItem].
   /// Also the height of the title bar of the keyword page of [SearchSessionCarousel].
   double get sidebarItemHeight;
+
+  /// The distance of the page switcher button from the edges.
+  double get pageSwitcherButtonSpacingFromEdges;
+
+  /// The size of the page switcher button icon.
+  double get pageSwitcherButtonIconSize;
+
+  /// The font size of the main title of the page switcher.
+  double get pageSwitcherMainTitleFontSize;
+
+  /// The font size of the sub title of the page switcher.
+  double get pageSwitcherSubTitleFontSize;
 }
 
 class _AppGlobalStylesImpl implements AppGlobalStyles {
@@ -21,6 +33,18 @@ class _AppGlobalStylesImpl implements AppGlobalStyles {
 
   @override
   double sidebarItemHeight = 60;
+
+  @override
+  double pageSwitcherButtonSpacingFromEdges = 4;
+
+  @override
+  double pageSwitcherButtonIconSize = 24;
+
+  @override
+  double pageSwitcherMainTitleFontSize = 16;
+
+  @override
+  double pageSwitcherSubTitleFontSize = 12;
 }
 
 extension GlobalStyleGetter on BuildContext {

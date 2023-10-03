@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 class SearchSessionResultsPage extends StatelessWidget {
   final SearchSession searchSession;
 
-  const SearchSessionResultsPage({required this.searchSession});
+  const SearchSessionResultsPage({super.key, required this.searchSession});
 
   @override
   Widget build(BuildContext context) {

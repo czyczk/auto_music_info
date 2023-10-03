@@ -5,10 +5,16 @@ class SearchSession {
   SearchSession({required this.sessionId});
 
   final String sessionId;
+
+  DateTime sessionUpdateTime = DateTime.now();
+
   SearchSessionPhaseEnum activePhase = SearchSessionPhaseEnum.phaseKeyword;
+
   SearchSessionPhaseEnum bestPhase = SearchSessionPhaseEnum.phaseKeyword;
+
   SearchSessionPhaseKeywordInfo phaseKeywordInfo =
       SearchSessionPhaseKeywordInfo();
+
   SearchSessionPhaseSearchResultsInfo phaseSearchResultsInfo =
       SearchSessionPhaseSearchResultsInfo.ofEmpty();
 }

@@ -1,5 +1,8 @@
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
+import 'package:auto_music_info/core/providers/ami_service/history_service.dart';
+import 'package:auto_music_info/core/providers/ami_service/impl/dummy_history_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/dummy_search_service_impl.dart';
+import 'package:auto_music_info/core/providers/ami_service/impl/history_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/search_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 import 'package:auto_music_info/module/scene_manager_scaffold/widgets/scene_manager_scaffold.dart';
@@ -49,10 +52,14 @@ class HomePage extends StatelessWidget {
             final useDummyData = appConfig.useDummyData ?? false;
             SearchService searchService =
                 useDummyData ? DummySearchServiceImpl() : SearchServiceImpl();
+            HistoryService historyService = useDummyData
+                ? DummyHistoryServiceImpl(searchService)
+                : HistoryServiceImpl();
 
             return MultiProvider(providers: [
               Provider(create: (_) => appConfig),
               ChangeNotifierProvider(create: (_) => searchService),
+              ChangeNotifierProvider(create: (_) => historyService),
             ], child: const SceneManagerScaffold());
           } else {
             return const Scaffold(

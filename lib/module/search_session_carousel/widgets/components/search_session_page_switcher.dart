@@ -2,7 +2,7 @@ import 'package:auto_music_info/core/common/styles/app_global_styles.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_pallet.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
-import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_session_page_switcher_button.dart';
+import 'package:auto_music_info/module/common/widgets/page_switcher_button.dart';
 import 'package:flutter/material.dart';
 
 class SearchSessionPageSwitcher extends StatefulWidget {
@@ -14,11 +14,6 @@ class SearchSessionPageSwitcher extends StatefulWidget {
     required this.activePageNotifier,
     this.colorSet,
   }) : super(key: key);
-
-  static const double _pageButtonSpacingFromEdges = 4;
-  static const double _pageButtonIconSize = 24;
-  static const double _mainTitleFontSize = 16;
-  static const double _subTitleFontSize = 12;
 
   final SearchSession searchSession;
   final Function onPreviousPagePressed;
@@ -64,9 +59,10 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           // Back button
           Container(
-            padding: const EdgeInsets.only(
-                left: SearchSessionPageSwitcher._pageButtonSpacingFromEdges),
-            child: SearchSessionPageSwitcherButton(
+            padding: EdgeInsets.only(
+                left:
+                    context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges),
+            child: PageSwitcherButton(
               icon: Icons.arrow_back,
               onPressed: widget.onPreviousPagePressed,
               determineButtonEnabled:
@@ -80,16 +76,20 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
                     ? 'New Session'
                     : widget.searchSession.phaseKeywordInfo.query,
                 style: TextStyle(
-                    fontSize: SearchSessionPageSwitcher._mainTitleFontSize,
+                    fontSize:
+                        context.appGlobalStyles.pageSwitcherMainTitleFontSize,
                     color: widget._determineForegroundColor(context)),
               )),
           Container(
-            padding: const EdgeInsets.only(
-                right: SearchSessionPageSwitcher._pageButtonSpacingFromEdges),
-            child: SearchSessionPageSwitcherButton(
+            padding: EdgeInsets.only(
+                right:
+                    context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges),
+            child: PageSwitcherButton(
               icon: Icons.arrow_forward,
               onPressed: widget.onNextPagePressed,
               determineButtonEnabled: widget._determineNextPageButtonEnabled,
+              buttonIconSize:
+                  context.appGlobalStyles.pageSwitcherButtonIconSize,
             ),
           ),
         ]));

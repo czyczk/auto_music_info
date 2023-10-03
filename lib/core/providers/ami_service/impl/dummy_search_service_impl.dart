@@ -5,7 +5,7 @@ import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 
 class DummySearchServiceImpl extends SearchService {
   final Map<SearchSourceEnum, List<SearchResultEntry>>
-      normalRealisticSearchResultMap = {
+      _normalRealisticSearchResultMap = {
     SearchSourceEnum.wikipedia: [
       SearchResultEntry(
         title: 'The Best Damn Thing',
@@ -128,7 +128,7 @@ class DummySearchServiceImpl extends SearchService {
           url:
               'https://longlong.com/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long',
           snippet:
-              'This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description.'),
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec purus sit amet erat maximus tempor. Mauris porta lectus nec turpis fringilla, ac ultricies libero molestie. Etiam at ornare nisi. Pellentesque vitae justo ut nibh fermentum faucibus. Nullam bibendum at lacus in bibendum. Sed bibendum elementum turpis, in fermentum ex dapibus quis. Sed consectetur orci quam, quis placerat elit venenatis et. Suspendisse ac pharetra leo. Morbi quis tempor nisi, bibendum lacinia nunc. Aenean quis finibus sem. Ut iaculis lacus sed posuere condimentum. Cras pretium dui nec iaculis accumsan. Proin eget scelerisque mi, non posuere odio. Sed bibendum sagittis nisi sed luctus.'),
       SearchResultEntry(
           title:
               '222 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
@@ -192,7 +192,72 @@ class DummySearchServiceImpl extends SearchService {
               'https://longlong.com/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long/long',
           snippet:
               'This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description. This is a long description.'),
-    ]
+    ],
+  };
+
+  final Map<SearchSourceEnum, List<SearchResultEntry>> jaSearchResultMap = {
+    SearchSourceEnum.wikipedia: [
+      SearchResultEntry(
+        title: 'Vivy -Fluorite Eye\'s Song',
+        url: 'https://ja.wikipedia.org/wiki/Vivy_-Fluorite_Eye%27s_Song-',
+        snippet:
+            '『Vivy -Fluorite Eye\'s Song-』（ヴィヴィ フローライトアイズソング）はWIT STUDIO制作による日本のテレビアニメ作品。公式略称は「ヴィヴィ」。2021年4月から6月 ...',
+      ),
+    ],
+    SearchSourceEnum.musicPlatforms: [
+      SearchResultEntry(
+        title: 'Sing My Pleasure - song and lyrics by ヴィヴィ(Vo.八木海莉)',
+        url: 'https://open.spotify.com/track/6wOazYrDGLhMAhwU6RArlg',
+        snippet:
+            'Listen to Sing My Pleasure on Spotify. ヴィヴィ(Vo.八木海莉) · Song · 2021.',
+      ),
+      SearchResultEntry(
+        title: '八木海莉/Sing My Pleasure - CDシングル',
+        url: 'https://tower.jp/item/5178072/Sing-My-Pleasure',
+        snippet:
+            'Sing My Pleasure / ヴィヴィ(Vo.八木海莉) M2.オーディオドラマ「Happiness ... Sing My Pleasure -Instrumental- M5.Happiness -Instrumental-. 1. [CDシングル]. 1 ...',
+      ),
+    ],
+    SearchSourceEnum.other: [],
+  };
+
+  final Map<SearchSourceEnum, List<SearchResultEntry>> zhCnSearchResultMap = {
+    SearchSourceEnum.wikipedia: [
+      SearchResultEntry(
+        title: '七里香_百度百科',
+        url:
+            'https://baike.baidu.com/item/%E4%B8%83%E9%87%8C%E9%A6%99/12009481',
+        snippet:
+            '《七里香》是周杰伦演唱的歌曲，由方文山作词，周杰伦谱曲，钟兴民编曲，收录在周杰伦2004年8月3日发行的同名专辑《七里香》中。2004年，该曲获得香港TVB8十大金曲最佳 ...',
+      ),
+    ],
+    SearchSourceEnum.musicPlatforms: [
+      SearchResultEntry(
+        title: '七里香',
+        url: 'https://y.qq.com/n/ryqq/songDetail/004Z8Ihr0JIu5s',
+        snippet:
+            '歌曲：七里香，歌手：周杰伦。七里香在线免费试听，更多周杰伦相关歌曲，尽在QQ音乐！QQ音乐是腾讯公司推出的一款网络音乐服务产品，海量音乐在线试听、新歌热歌在线 ...',
+      ),
+    ],
+  };
+
+  final Map<SearchSourceEnum, List<SearchResultEntry>> zhTwSearchResultMap = {
+    SearchSourceEnum.wikipedia: [
+      SearchResultEntry(
+        title: '七里香(專輯) - 維基百科，自由的百科全書',
+        url:
+            'https://zh.wikipedia.org/wiki/%E4%B8%83%E9%87%8C%E9%A6%99_(%E5%B0%88%E8%BC%AF)',
+        snippet: '七里香(專輯) 編輯 ... 《七里香》是台灣歌手周杰倫發行第五張國語專輯。由台灣新力音樂於2004年8月3日發行。',
+      ),
+    ],
+    SearchSourceEnum.musicPlatforms: [
+      SearchResultEntry(
+        title: '七里香-歌詞-周杰倫(Jay Chou)',
+        url: 'https://www.kkbox.com/hk/tc/song/SkZOLqKGFd6eC_yZeU',
+        snippet:
+            '作詞：方文山 作曲：周杰倫. 窗外的麻雀在電線桿上多嘴妳說這一句很有夏天的感覺手中的鉛筆在紙上來來回回我用幾行字形容妳是我的誰 秋刀魚的滋味貓跟妳都想瞭解初戀的 ...',
+      ),
+    ],
   };
 
   @override
@@ -204,11 +269,29 @@ class DummySearchServiceImpl extends SearchService {
         query: keyword,
         resultMap: longTextSearchResultMap,
       );
+    } else if (keyword.contains("ja")) {
+      return SearchResults(
+        serviceProvider: 'Google',
+        query: keyword,
+        resultMap: jaSearchResultMap,
+      );
+    } else if (keyword.contains("zhCn")) {
+      return SearchResults(
+        serviceProvider: 'Google',
+        query: keyword,
+        resultMap: zhCnSearchResultMap,
+      );
+    } else if (keyword.contains("zhTw")) {
+      return SearchResults(
+        serviceProvider: 'Google',
+        query: keyword,
+        resultMap: zhTwSearchResultMap,
+      );
     } else {
       return SearchResults(
         serviceProvider: 'Google',
         query: keyword,
-        resultMap: normalRealisticSearchResultMap,
+        resultMap: _normalRealisticSearchResultMap,
       );
     }
   }

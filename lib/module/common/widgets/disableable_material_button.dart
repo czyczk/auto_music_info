@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DisableableMaterialButtonWrapper extends StatelessWidget {
-  bool isEnabled;
-  bool visibleWhenDisabled;
-  RawMaterialButton child;
+  final bool isEnabled;
+  final bool visibleWhenDisabled;
+  final RawMaterialButton child;
 
-  DisableableMaterialButtonWrapper({
+  const DisableableMaterialButtonWrapper({
     super.key,
     this.isEnabled = true,
     this.visibleWhenDisabled = true,

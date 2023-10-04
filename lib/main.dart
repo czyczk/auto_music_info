@@ -50,8 +50,9 @@ class HomePage extends StatelessWidget {
 
             AppConfig appConfig = snapshot.data!;
             final useDummyData = appConfig.useDummyData ?? false;
-            SearchService searchService =
-                useDummyData ? DummySearchServiceImpl() : SearchServiceImpl();
+            SearchService searchService = useDummyData
+                ? DummySearchServiceImpl()
+                : SearchServiceImpl(appConfig: appConfig);
             HistoryService historyService = useDummyData
                 ? DummyHistoryServiceImpl(searchService)
                 : HistoryServiceImpl();

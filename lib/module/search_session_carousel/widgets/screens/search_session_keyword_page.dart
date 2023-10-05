@@ -28,7 +28,8 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
   // Debounce
   bool isDebouncing = false;
 
-  Future<void> _submitKeyword(SearchService searchService) async {
+  Future<void> _submitKeyword(SearchService searchService,
+      ScaffoldMessengerState scaffoldMessengerState) async {
     // Debounce
     if (isDebouncing) {
       return;
@@ -43,29 +44,39 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
       print('enteredKeyword: $enteredKeyword');
     }
 
-    SearchResults searchResults =
-        await searchService.searchWithKeyword(enteredKeyword);
+    try {
+      SearchResults searchResults =
+          await searchService.searchWithKeyword(enteredKeyword);
 
-    setState(() {
-      // Push forward after a successful search.
-      // Update session info.
-      widget.searchSession.phaseKeywordInfo.query = enteredKeyword;
-      widget.searchSession.activePhase =
-          SearchSessionPhaseEnum.phaseSearchResults;
-      widget.searchSession.sessionUpdateTime = DateTime.now();
-      // Set the best phase to phaseSearchResults even if there are further phases before.
-      // Any further phases will be not accessible.
-      widget.searchSession.bestPhase =
-          SearchSessionPhaseEnum.phaseSearchResults;
-      widget.searchSession.phaseSearchResultsInfo =
-          SearchSessionPhaseSearchResultsInfo.ofResults(
-              query: searchResults.query,
-              correctedQuery: searchResults.correctedQuery,
-              searchResultsMap: searchResults.resultMap);
-
-      widget.updateActivePageFunc(widget.searchSession.activePhase.index);
-      isDebouncing = false;
-    });
+      setState(() {
+        // Push forward after a successful search.
+        // Update session info.
+        widget.searchSession.phaseKeywordInfo.query = enteredKeyword;
+        widget.searchSession.activePhase =
+            SearchSessionPhaseEnum.phaseSearchResults;
+        widget.searchSession.sessionUpdateTime = DateTime.now();
+        // Set the best phase to phaseSearchResults even if there are further phases before.
+        // Any further phases will be not accessible.
+        widget.searchSession.bestPhase =
+            SearchSessionPhaseEnum.phaseSearchResults;
+        widget.searchSession.phaseSearchResultsInfo =
+            SearchSessionPhaseSearchResultsInfo.ofResults(
+                query: searchResults.query,
+                correctedQuery: searchResults.correctedQuery,
+                searchResultsMap: searchResults.resultMap);
+      });
+    } catch (e) {
+      scaffoldMessengerState.showSnackBar(
+        SnackBar(
+          content: Text('Failed to search: ${e.toString()}'),
+        ),
+      );
+    } finally {
+      setState(() {
+        widget.updateActivePageFunc(widget.searchSession.activePhase.index);
+        isDebouncing = false;
+      });
+    }
   }
 
   @override
@@ -92,7 +103,10 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                 onKey: (event) => {
                   if (event is RawKeyDownEvent &&
                       event.logicalKey == LogicalKeyboardKey.enter)
-                    _submitKeyword(searchService),
+                    _submitKeyword(
+                      searchService,
+                      ScaffoldMessenger.of(context),
+                    ),
                 },
                 focusNode: focusNode,
                 child: TextField(
@@ -127,7 +141,10 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                   Icons.search,
                   size: 28,
                 ),
-                onPressed: () => _submitKeyword(searchService),
+                onPressed: () => _submitKeyword(
+                  searchService,
+                  ScaffoldMessenger.of(context),
+                ),
               ),
             )
           ]),

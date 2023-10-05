@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:auto_music_info/core/config/app_config/app_config.dart';
-import 'package:auto_music_info/core/providers/ami_service/models/search_result_dto.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/dto/search_result_dto.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/dto/server_message_dto.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_results.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 import 'package:http/http.dart';
@@ -24,8 +25,16 @@ class SearchServiceImpl extends SearchService {
           'Failed to search with keyword; keyword: $keyword; statusCode: ${resp.statusCode}');
     }
 
-    final searchResultDto =
-        jsonDecode(resp.body).cast<Map<String, SearchResultDto>>();
-    return SearchResults.fromIntegratedDto(searchResultDto);
+    final respJson = jsonDecode(utf8.decode(resp.bodyBytes));
+    final respDto = ServerMessageDto.fromJson(respJson);
+    final dtoMap = Map<String, SearchResultDto>.fromEntries(
+      (respDto.data as Map).entries.map(
+            (entry) => MapEntry(
+              entry.key,
+              SearchResultDto.fromJson(entry.value),
+            ),
+          ),
+    );
+    return SearchResults.fromIntegratedDto(dtoMap);
   }
 }

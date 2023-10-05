@@ -1,4 +1,4 @@
-import 'package:auto_music_info/core/providers/ami_service/models/search_result_dto.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/dto/search_result_dto.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
 
@@ -14,7 +14,7 @@ class SearchResults {
   final String? correctedQuery;
   final Map<SearchSourceEnum, List<SearchResultEntry>> resultMap;
 
-  static SearchResults fromIntegratedDto(
+  factory SearchResults.fromIntegratedDto(
       Map<String, SearchResultDto> integratedDto) {
     if (integratedDto.isEmpty) {
       throw Exception('map is empty');

@@ -1,4 +1,4 @@
-import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry_dto.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/dto/search_result_entry_dto.dart';
 
 class SearchResultEntry {
   SearchResultEntry(
@@ -16,7 +16,7 @@ class SearchResultEntry {
   /// E.g. "en.wikipedia.org".
   final String site;
 
-  static SearchResultEntry fromDto(SearchResultEntryDto dto) {
+  factory SearchResultEntry.fromDto(SearchResultEntryDto dto) {
     return SearchResultEntry(
       title: dto.title,
       url: dto.url,

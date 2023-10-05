@@ -17,9 +17,6 @@ Future<AppConfig> loadAppConfig() async {
 
   final appConfigContent = await configFile.readAsString();
 
-  // Sleep for 1 sec
-  await Future.delayed(const Duration(seconds: 1));
-
   Map<String, dynamic> jsonMap = jsonDecode(appConfigContent);
   AppConfig appConfig = AppConfig.fromJson(jsonMap);
   return appConfig;

@@ -261,7 +261,7 @@ class DummySearchServiceImpl extends SearchService {
     SearchSourceEnum.other: [],
   };
 
-  final Map<SearchSourceEnum, List<SearchResultEntry>> zhCnSearchResultMap = {
+  final Map<SearchSourceEnum, List<SearchResultEntry>> zhHansSearchResultMap = {
     SearchSourceEnum.wikipedia: [
       SearchResultEntry(
         title: '七里香_百度百科',
@@ -283,7 +283,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
   };
 
-  final Map<SearchSourceEnum, List<SearchResultEntry>> zhTwSearchResultMap = {
+  final Map<SearchSourceEnum, List<SearchResultEntry>> zhHantSearchResultMap = {
     SearchSourceEnum.wikipedia: [
       SearchResultEntry(
         title: '七里香(專輯) - 維基百科，自由的百科全書',
@@ -319,17 +319,17 @@ class DummySearchServiceImpl extends SearchService {
         query: keyword,
         resultMap: jaSearchResultMap,
       );
-    } else if (keyword.contains("zhCn")) {
+    } else if (keyword.contains("zhHans")) {
       return SearchResults(
         serviceProvider: 'Google',
         query: keyword,
-        resultMap: zhCnSearchResultMap,
+        resultMap: zhHansSearchResultMap,
       );
-    } else if (keyword.contains("zhTw")) {
+    } else if (keyword.contains("zhHant")) {
       return SearchResults(
         serviceProvider: 'Google',
         query: keyword,
-        resultMap: zhTwSearchResultMap,
+        resultMap: zhHantSearchResultMap,
       );
     } else {
       return SearchResults(

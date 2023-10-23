@@ -2,9 +2,12 @@ import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
 import 'package:auto_music_info/core/providers/ami_service/history_service.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/dummy_history_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/dummy_search_service_impl.dart';
+import 'package:auto_music_info/core/providers/ami_service/impl/dummy_text_checker_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/history_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/impl/search_service_impl.dart';
+import 'package:auto_music_info/core/providers/ami_service/impl/text_checker_service_impl.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
+import 'package:auto_music_info/core/providers/ami_service/text_checker_service.dart';
 import 'package:auto_music_info/module/scene_manager_scaffold/widgets/scene_manager_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,6 +51,7 @@ class HomePage extends StatelessWidget {
               return Text('Error: ${snapshot.error}');
             }
 
+            // App config and providers
             AppConfig appConfig = snapshot.data!;
             final useDummyData = appConfig.useDummyData ?? false;
             SearchService searchService = useDummyData
@@ -56,11 +60,15 @@ class HomePage extends StatelessWidget {
             HistoryService historyService = useDummyData
                 ? DummyHistoryServiceImpl(searchService)
                 : HistoryServiceImpl();
+            TextCheckerService textCheckerService = useDummyData
+                ? DummyTextCheckerServiceImpl()
+                : TextCheckerServiceImpl(appConfig: appConfig);
 
             return MultiProvider(providers: [
               Provider(create: (_) => appConfig),
               ChangeNotifierProvider(create: (_) => searchService),
               ChangeNotifierProvider(create: (_) => historyService),
+              ChangeNotifierProvider(create: (_) => textCheckerService),
             ], child: const SceneManagerScaffold());
           } else {
             return const Scaffold(

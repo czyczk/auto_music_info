@@ -1,6 +1,10 @@
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_results.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/text_language_enum.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/text_validity_result.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
+import 'package:auto_music_info/core/providers/ami_service/text_checker_service.dart';
+import 'package:auto_music_info/module/common/widgets/popup_dialog.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SearchSessionKeywordPage extends StatefulWidget {
-  SearchSessionKeywordPage({
+  const SearchSessionKeywordPage({
     Key? key,
     required this.searchSession,
     required this.updateActivePageFunc,
@@ -24,12 +28,16 @@ class SearchSessionKeywordPage extends StatefulWidget {
 
 class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
   final keywordTextController = TextEditingController();
+  final keySearchButton = GlobalKey();
 
   // Debounce
   bool isDebouncing = false;
 
-  Future<void> _submitKeyword(SearchService searchService,
-      ScaffoldMessengerState scaffoldMessengerState) async {
+  Future<void> _submitKeyword(
+    SearchService searchService,
+    TextCheckerService textCheckerService,
+    ScaffoldMessengerState scaffoldMessengerState,
+  ) async {
     // Debounce
     if (isDebouncing) {
       return;
@@ -45,6 +53,20 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
     }
 
     try {
+      // Check text validity
+      // TextLanguage: todo
+      TextValidityResult textValidityResult =
+          await textCheckerService.checkTextValidity(
+              keywordTextController.text, TextLanguageEnum.notSpecified);
+      if (!textValidityResult.isValid) {
+        bool shouldContinue = await _showPopupDialogOnInvalidTextCheckerResult(
+            textValidityResult);
+        if (!shouldContinue) {
+          return;
+        }
+      }
+
+      // Search
       SearchResults searchResults =
           await searchService.searchWithKeyword(enteredKeyword);
 
@@ -79,9 +101,35 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
     }
   }
 
+  Future<bool> _showPopupDialogOnInvalidTextCheckerResult(
+    TextValidityResult textValidityResult,
+  ) async {
+    bool? shouldContinue = await showAdaptiveDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return PopupDialog(
+            title: 'Possible unwanted character found',
+            message: 'Invalid char: ${textValidityResult.invalidChar}\n'
+                'Code point: 0x${textValidityResult.invalidChar!.codeUnits.first.toRadixString(16)}\n'
+                'Reason: ${textValidityResult.invalidReason}',
+            onOk: () => Navigator.of(context).pop(true),
+            onCancel: () => Navigator.of(context).pop(false),
+            okText: 'Noted and Proceed',
+          );
+        });
+
+    if (kDebugMode) {
+      print('shouldContinue: $shouldContinue');
+    }
+    return shouldContinue == true;
+  }
+
   @override
   Widget build(BuildContext context) {
     SearchService searchService = Provider.of<SearchService>(context);
+    TextCheckerService textCheckerService =
+        Provider.of<TextCheckerService>(context);
     FocusNode focusNode = FocusNode();
 
     return Container(
@@ -105,6 +153,7 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                       event.logicalKey == LogicalKeyboardKey.enter)
                     _submitKeyword(
                       searchService,
+                      textCheckerService,
                       ScaffoldMessenger.of(context),
                     ),
                 },
@@ -137,12 +186,14 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
             Container(
               padding: const EdgeInsets.only(left: 16),
               child: IconButton(
+                key: keySearchButton,
                 icon: const Icon(
                   Icons.search,
                   size: 28,
                 ),
                 onPressed: () => _submitKeyword(
                   searchService,
+                  textCheckerService,
                   ScaffoldMessenger.of(context),
                 ),
               ),

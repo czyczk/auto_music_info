@@ -1,5 +1,6 @@
 import 'package:auto_music_info/core/providers/ami_service/history_service.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/history_digest_entry.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/text_language_enum.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 
@@ -24,7 +25,7 @@ class DummyHistoryServiceImpl extends HistoryService {
 
       session.phaseKeywordInfo = SearchSessionPhaseKeywordInfo();
       session.phaseKeywordInfo.query = query;
-      session.phaseKeywordInfo.textLanguage = SearchSessionTextLanguageEnum.es;
+      session.phaseKeywordInfo.textLanguage = TextLanguageEnum.latin;
 
       session.phaseSearchResultsInfo =
           SearchSessionPhaseSearchResultsInfo.ofResults(
@@ -46,7 +47,7 @@ class DummyHistoryServiceImpl extends HistoryService {
 
       session.phaseKeywordInfo = SearchSessionPhaseKeywordInfo();
       session.phaseKeywordInfo.query = query;
-      session.phaseKeywordInfo.textLanguage = SearchSessionTextLanguageEnum.en;
+      session.phaseKeywordInfo.textLanguage = TextLanguageEnum.latin;
 
       session.phaseSearchResultsInfo =
           SearchSessionPhaseSearchResultsInfo.ofResults(
@@ -67,8 +68,7 @@ class DummyHistoryServiceImpl extends HistoryService {
 
       session.phaseKeywordInfo = SearchSessionPhaseKeywordInfo();
       session.phaseKeywordInfo.query = query;
-      session.phaseKeywordInfo.textLanguage =
-          SearchSessionTextLanguageEnum.zhCn;
+      session.phaseKeywordInfo.textLanguage = TextLanguageEnum.zhHans;
 
       session.phaseSearchResultsInfo =
           SearchSessionPhaseSearchResultsInfo.ofResults(
@@ -89,8 +89,7 @@ class DummyHistoryServiceImpl extends HistoryService {
 
       session.phaseKeywordInfo = SearchSessionPhaseKeywordInfo();
       session.phaseKeywordInfo.query = query;
-      session.phaseKeywordInfo.textLanguage =
-          SearchSessionTextLanguageEnum.zhTw;
+      session.phaseKeywordInfo.textLanguage = TextLanguageEnum.zhHant;
 
       session.phaseSearchResultsInfo =
           SearchSessionPhaseSearchResultsInfo.ofResults(
@@ -111,7 +110,7 @@ class DummyHistoryServiceImpl extends HistoryService {
 
       session.phaseKeywordInfo = SearchSessionPhaseKeywordInfo();
       session.phaseKeywordInfo.query = query;
-      session.phaseKeywordInfo.textLanguage = SearchSessionTextLanguageEnum.ja;
+      session.phaseKeywordInfo.textLanguage = TextLanguageEnum.japanese;
 
       session.phaseSearchResultsInfo =
           SearchSessionPhaseSearchResultsInfo.ofResults(

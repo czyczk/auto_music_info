@@ -1,5 +1,6 @@
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/text_language_enum.dart';
 
 class SearchSession {
   SearchSession({required this.sessionId});
@@ -21,25 +22,9 @@ class SearchSession {
 
 enum SearchSessionPhaseEnum { phaseKeyword, phaseSearchResults }
 
-enum SearchSessionTextLanguageEnum {
-  notSpecified,
-  en,
-  fr,
-  de,
-  it,
-  ja,
-  ko,
-  pt,
-  ru,
-  es,
-  zhCn,
-  zhTw,
-}
-
 class SearchSessionPhaseKeywordInfo {
   String query = "";
-  SearchSessionTextLanguageEnum textLanguage =
-      SearchSessionTextLanguageEnum.notSpecified;
+  TextLanguageEnum textLanguage = TextLanguageEnum.notSpecified;
 }
 
 class SearchSessionPhaseSearchResultsInfo {

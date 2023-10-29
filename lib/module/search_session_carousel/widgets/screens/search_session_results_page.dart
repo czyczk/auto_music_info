@@ -11,6 +11,14 @@ class SearchSessionResultsPage extends StatelessWidget {
 
   const SearchSessionResultsPage({super.key, required this.searchSession});
 
+  TextStyle _determineDefaultTextStyle() {
+    // TODO depends on the text language of the session.
+    return const TextStyle(
+      fontFamily: 'Roboto',
+      fontFamilyFallback: ['Segoe UI', 'Sarasa UI J'],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -73,12 +81,22 @@ class SearchSessionResultsPage extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () => launchUrl(
                                         Uri.parse(searchResultEntry.url)),
-                                    child: Text(searchResultEntry.title,
-                                        style: TextStyle(
-                                          color: context.theme
-                                              .colorSchemeExtended.tertiary,
-                                          fontWeight: FontWeight.w500,
-                                        )),
+                                    child: DefaultTextStyle(
+                                      style: _determineDefaultTextStyle(),
+                                      child: Container(
+                                        constraints: const BoxConstraints(
+                                          minHeight: 32,
+                                        ),
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          searchResultEntry.title,
+                                          style: TextStyle(
+                                            color: context.theme
+                                                .colorSchemeExtended.tertiary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 RawMaterialButton(
@@ -86,10 +104,10 @@ class SearchSessionResultsPage extends StatelessWidget {
                                     await Clipboard.setData(ClipboardData(
                                         text: searchResultEntry.title))
                                   },
-                                  padding: const EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(0),
                                   constraints: const BoxConstraints(
-                                    minWidth: 24,
-                                    minHeight: 24,
+                                    minWidth: 32,
+                                    minHeight: 32,
                                   ),
                                   materialTapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
@@ -109,13 +127,18 @@ class SearchSessionResultsPage extends StatelessWidget {
                                     child: InkWell(
                                       onTap: () => launchUrl(
                                           Uri.parse(searchResultEntry.url)),
-                                      child: Text(
-                                        searchResultEntry.url,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: context.theme
-                                                .colorSchemeExtended.secondary),
+                                      child: DefaultTextStyle(
+                                        style: _determineDefaultTextStyle(),
+                                        child: Text(
+                                          searchResultEntry.url,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: context
+                                                  .theme
+                                                  .colorSchemeExtended
+                                                  .secondary),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -138,16 +161,20 @@ class SearchSessionResultsPage extends StatelessWidget {
                                   )
                                 ]),
                                 // Search result entry snippet
-                                Theme(
-                                  data: ThemeData(
+                                DefaultTextStyle.merge(
+                                  style: _determineDefaultTextStyle(),
+                                  child: Theme(
+                                    data: ThemeData(
                                       textSelectionTheme:
                                           TextSelectionThemeData(
-                                    selectionColor: context
-                                        .theme.colorSchemeExtended.tertiary
-                                        .withOpacity(0.3),
-                                  )),
-                                  child: SelectableText(
-                                    searchResultEntry.snippet,
+                                        selectionColor: context
+                                            .theme.colorSchemeExtended.tertiary
+                                            .withOpacity(0.3),
+                                      ),
+                                    ),
+                                    child: SelectableText(
+                                      searchResultEntry.snippet,
+                                    ),
                                   ),
                                 ),
                               ],

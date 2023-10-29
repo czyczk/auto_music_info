@@ -29,9 +29,30 @@ class SearchSessionKeywordPage extends StatefulWidget {
 class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
   final keywordTextController = TextEditingController();
   final keySearchButton = GlobalKey();
+  final keyboardListenerFocusNode = FocusNode();
+  final textFieldFocusNode = FocusNode();
 
   // Debounce
   bool isDebouncing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _ensureFocus();
+  }
+
+  @override
+  void dispose() {
+    keywordTextController.dispose();
+    keyboardListenerFocusNode.dispose();
+    textFieldFocusNode.dispose();
+    super.dispose();
+  }
+
+  void _ensureFocus() {
+    textFieldFocusNode.canRequestFocus = true;
+    textFieldFocusNode.requestFocus();
+  }
 
   Future<void> _submitKeyword(
     SearchService searchService,
@@ -98,6 +119,8 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
         widget.updateActivePageFunc(widget.searchSession.activePhase.index);
         isDebouncing = false;
       });
+
+      _ensureFocus();
     }
   }
 
@@ -115,7 +138,7 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                 'Reason: ${textValidityResult.invalidReason}',
             onOk: () => Navigator.of(context).pop(true),
             onCancel: () => Navigator.of(context).pop(false),
-            okText: 'Noted and Proceed',
+            okText: 'Proceed',
           );
         });
 
@@ -130,7 +153,10 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
     SearchService searchService = Provider.of<SearchService>(context);
     TextCheckerService textCheckerService =
         Provider.of<TextCheckerService>(context);
-    FocusNode focusNode = FocusNode();
+
+    if (keywordTextController.text.isEmpty) {
+      keywordTextController.text = widget.searchSession.phaseKeywordInfo.query;
+    }
 
     return Container(
         color: Color.lerp(
@@ -148,6 +174,7 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
             ConstrainedBox(
               constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
               child: RawKeyboardListener(
+                focusNode: FocusNode(),
                 onKey: (event) => {
                   if (event is RawKeyDownEvent &&
                       event.logicalKey == LogicalKeyboardKey.enter)
@@ -157,10 +184,9 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                       ScaffoldMessenger.of(context),
                     ),
                 },
-                focusNode: focusNode,
                 child: TextField(
                   controller: keywordTextController,
-                  autofocus: true,
+                  focusNode: textFieldFocusNode,
                   enabled: !isDebouncing,
                   decoration: InputDecoration(
                     filled: true,

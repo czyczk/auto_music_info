@@ -27,6 +27,11 @@ class SearchServiceImpl extends SearchService {
 
     final respJson = jsonDecode(utf8.decode(resp.bodyBytes));
     final respDto = ServerMessageDto.fromJson(respJson);
+    if (respDto.error != null) {
+      throw Exception(
+          'Failed to search with keyword because of server error; keyword: $keyword; errorCode: ${respDto.error!.errorCode}; errorMessage: ${respDto.error!.message}');
+    }
+
     final dtoMap = Map<String, SearchResultDto>.fromEntries(
       (respDto.data as Map).entries.map(
             (entry) => MapEntry(

@@ -4,11 +4,16 @@ part 'server_exception_dto.g.dart';
 
 @JsonSerializable()
 class ServerExceptionDto {
-  late final String code;
+  late final String errorCode;
 
   late final String message;
 
   ServerExceptionDto();
+
+  @override
+  String toString() {
+    return 'ServerExceptionDto(errorCode: $errorCode, message: $message)';
+  }
 
   factory ServerExceptionDto.fromJson(Map<String, dynamic> json) =>
       _$ServerExceptionDtoFromJson(json);

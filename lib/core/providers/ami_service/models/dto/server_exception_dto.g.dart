@@ -8,11 +8,11 @@ part of 'server_exception_dto.dart';
 
 ServerExceptionDto _$ServerExceptionDtoFromJson(Map<String, dynamic> json) =>
     ServerExceptionDto()
-      ..code = json['code'] as String
+      ..errorCode = json['errorCode'] as String
       ..message = json['message'] as String;
 
 Map<String, dynamic> _$ServerExceptionDtoToJson(ServerExceptionDto instance) =>
     <String, dynamic>{
-      'code': instance.code,
+      'errorCode': instance.errorCode,
       'message': instance.message,
     };

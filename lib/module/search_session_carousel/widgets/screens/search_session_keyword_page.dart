@@ -74,6 +74,10 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
     }
 
     try {
+      if (enteredKeyword.isEmpty) {
+        return;
+      }
+
       // Check text validity
       // TextLanguage: todo
       TextValidityResult textValidityResult =
@@ -108,9 +112,11 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                 correctedQuery: searchResults.correctedQuery,
                 searchResultsMap: searchResults.resultMap);
       });
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
       scaffoldMessengerState.showSnackBar(
         SnackBar(
+          duration: const Duration(seconds: 5),
           content: Text('Failed to search: ${e.toString()}'),
         ),
       );

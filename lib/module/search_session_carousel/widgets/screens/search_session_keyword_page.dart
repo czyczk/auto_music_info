@@ -4,6 +4,7 @@ import 'package:auto_music_info/core/providers/ami_service/models/text_language_
 import 'package:auto_music_info/core/providers/ami_service/models/text_validity_result.dart';
 import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 import 'package:auto_music_info/core/providers/ami_service/text_checker_service.dart';
+import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:auto_music_info/module/common/widgets/popup_dialog.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 import 'package:flutter/foundation.dart';
@@ -117,7 +118,8 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
       scaffoldMessengerState.showSnackBar(
         SnackBar(
           duration: const Duration(seconds: 5),
-          content: Text('Failed to search: ${e.toString()}'),
+          content:
+              AmiTextStyle(child: Text('Failed to search: ${e.toString()}')),
         ),
       );
     } finally {
@@ -190,26 +192,30 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
                       ScaffoldMessenger.of(context),
                     ),
                 },
-                child: TextField(
-                  controller: keywordTextController,
-                  focusNode: textFieldFocusNode,
-                  enabled: !isDebouncing,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white.withOpacity(0.3),
-                    enabledBorder: const OutlineInputBorder(),
-                    focusedBorder: const OutlineInputBorder(),
-                    disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color:
-                            context.theme.colorSchemeExtended.onPrimaryDisabled,
+                child: AmiTextStyle(
+                  // TODO depends on the text language of the session.
+                  textLanguage: null,
+                  child: TextField(
+                    controller: keywordTextController,
+                    focusNode: textFieldFocusNode,
+                    enabled: !isDebouncing,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.3),
+                      enabledBorder: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(),
+                      disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: context
+                              .theme.colorSchemeExtended.onPrimaryDisabled,
+                        ),
                       ),
-                    ),
-                    hintText: 'Enter keyword to search',
-                    hintStyle: TextStyle(
-                      color: context.theme.colorSchemeExtended.onBackground,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
+                      hintText: 'Enter keyword to search',
+                      hintStyle: TextStyle(
+                        color: context.theme.colorSchemeExtended.onBackground,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -231,7 +237,8 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
               ),
             )
           ]),
-          Text(widget.searchSession.activePhase.toString()),
+          AmiTextStyle(
+              child: Text(widget.searchSession.activePhase.toString())),
           // A spacer to push the main content up a little.
           const SizedBox(
             height: 64,

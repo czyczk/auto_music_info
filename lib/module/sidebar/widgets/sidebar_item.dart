@@ -2,6 +2,7 @@ import 'package:auto_music_info/core/common/scene_info_model.dart';
 import 'package:auto_music_info/core/common/styles/app_global_styles.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_pallet.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
+import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:flutter/material.dart';
 
 class SidebarItem extends StatefulWidget {
@@ -88,11 +89,13 @@ class _SidebarItemState extends State<SidebarItem> {
                 color:
                     _determineForegroundColor(context.theme, widget.isSelected),
               ),
-              title: Text(
-                widget.sceneInfo.name,
-                style: TextStyle(
-                  color: _determineForegroundColor(
-                      context.theme, widget.isSelected),
+              title: AmiTextStyle(
+                child: Text(
+                  widget.sceneInfo.name,
+                  style: TextStyle(
+                    color: _determineForegroundColor(
+                        context.theme, widget.isSelected),
+                  ),
                 ),
               ),
               onTap: () => widget.onTap(widget.sceneInfo),

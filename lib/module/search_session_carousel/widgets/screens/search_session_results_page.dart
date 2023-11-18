@@ -1,5 +1,6 @@
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
+import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:auto_music_info/module/common/widgets/dash_divider.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,6 @@ class SearchSessionResultsPage extends StatelessWidget {
   final SearchSession searchSession;
 
   const SearchSessionResultsPage({super.key, required this.searchSession});
-
-  TextStyle _determineDefaultTextStyle() {
-    // TODO depends on the text language of the session.
-    return const TextStyle(
-      fontFamily: 'Roboto',
-      fontFamilyFallback: ['Segoe UI', 'Sarasa UI J'],
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +34,15 @@ class SearchSessionResultsPage extends StatelessWidget {
                     // Search source
                     Padding(
                       padding: const EdgeInsets.fromLTRB(12, 12, 12, 6),
-                      child: Text(
-                        searchSource.displayText,
-                        style: TextStyle(
-                          color: context.theme.colorSchemeExtended.onBackground,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                      child: AmiTextStyle(
+                        child: Text(
+                          searchSource.displayText,
+                          style: TextStyle(
+                            color:
+                                context.theme.colorSchemeExtended.onBackground,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -81,8 +77,9 @@ class SearchSessionResultsPage extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () => launchUrl(
                                         Uri.parse(searchResultEntry.url)),
-                                    child: DefaultTextStyle(
-                                      style: _determineDefaultTextStyle(),
+                                    child: AmiTextStyle(
+                                      // TODO depends on the text language of the session.
+                                      textLanguage: null,
                                       child: Container(
                                         constraints: const BoxConstraints(
                                           minHeight: 32,
@@ -127,8 +124,9 @@ class SearchSessionResultsPage extends StatelessWidget {
                                     child: InkWell(
                                       onTap: () => launchUrl(
                                           Uri.parse(searchResultEntry.url)),
-                                      child: DefaultTextStyle(
-                                        style: _determineDefaultTextStyle(),
+                                      child: AmiTextStyle(
+                                        // TODO depends on the text language of the session.
+                                        textLanguage: null,
                                         child: Text(
                                           searchResultEntry.url,
                                           maxLines: 1,
@@ -161,20 +159,11 @@ class SearchSessionResultsPage extends StatelessWidget {
                                   )
                                 ]),
                                 // Search result entry snippet
-                                DefaultTextStyle.merge(
-                                  style: _determineDefaultTextStyle(),
-                                  child: Theme(
-                                    data: ThemeData(
-                                      textSelectionTheme:
-                                          TextSelectionThemeData(
-                                        selectionColor: context
-                                            .theme.colorSchemeExtended.tertiary
-                                            .withOpacity(0.3),
-                                      ),
-                                    ),
-                                    child: SelectableText(
-                                      searchResultEntry.snippet,
-                                    ),
+                                AmiTextStyle(
+                                  // TODO depends on the text language of the session.
+                                  textLanguage: null,
+                                  child: SelectableText(
+                                    searchResultEntry.snippet,
                                   ),
                                 ),
                               ],

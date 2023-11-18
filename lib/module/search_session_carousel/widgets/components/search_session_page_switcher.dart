@@ -1,8 +1,9 @@
 import 'package:auto_music_info/core/common/styles/app_global_styles.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_pallet.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
-import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
+import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:auto_music_info/module/common/widgets/page_switcher_button.dart';
+import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 import 'package:flutter/material.dart';
 
 class SearchSessionPageSwitcher extends StatefulWidget {
@@ -71,14 +72,16 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
           ),
           Tooltip(
               message: 'Active phase: ${widget.searchSession.activePhase}',
-              child: Text(
-                widget.searchSession.phaseKeywordInfo.query == ''
-                    ? 'New Session'
-                    : widget.searchSession.phaseKeywordInfo.query,
-                style: TextStyle(
-                    fontSize:
-                        context.appGlobalStyles.pageSwitcherMainTitleFontSize,
-                    color: widget._determineForegroundColor(context)),
+              child: AmiTextStyle(
+                child: Text(
+                  widget.searchSession.phaseKeywordInfo.query == ''
+                      ? 'New Session'
+                      : widget.searchSession.phaseKeywordInfo.query,
+                  style: TextStyle(
+                      fontSize:
+                          context.appGlobalStyles.pageSwitcherMainTitleFontSize,
+                      color: widget._determineForegroundColor(context)),
+                ),
               )),
           Container(
             padding: EdgeInsets.only(

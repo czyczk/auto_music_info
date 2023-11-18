@@ -1,5 +1,6 @@
 import 'package:auto_music_info/core/config/color_scheme/app_pallet.dart';
 import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
+import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:flutter/material.dart';
 
 class SidebarRowButton extends StatefulWidget {
@@ -75,10 +76,12 @@ class _SidebarItemState extends State<SidebarRowButton> {
                 widget.icon,
                 color: _determineForegroundColor(context.theme),
               ),
-              title: Text(
-                widget.text,
-                style: TextStyle(
-                  color: _determineForegroundColor(context.theme),
+              title: AmiTextStyle(
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                    color: _determineForegroundColor(context.theme),
+                  ),
                 ),
               ),
               onTap: () => widget.onTap(),

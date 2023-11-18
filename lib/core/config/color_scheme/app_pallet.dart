@@ -33,11 +33,11 @@ class _DarkGrayBlueColors extends ColorSet {
   const _DarkGrayBlueColors();
 
   @override
-  final background = const Color(0xFF283440);
+  final background = const Color(0xFF1A2D40);
   @override
-  final backgroundHover = const Color(0xFF47515C);
+  final backgroundHover = const Color(0xFF2E445C);
   @override
-  final backgroundActive = const Color(0xFF394552);
+  final backgroundActive = const Color(0xFF253B52);
   @override
   final backgroundDisabled = const Color(0xFF353535);
 

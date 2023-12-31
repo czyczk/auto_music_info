@@ -3,6 +3,7 @@ import 'package:auto_music_info/core/providers/ami_service/models/search_result_
 import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:auto_music_info/module/common/widgets/dash_divider.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
+import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_result_entry_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -68,7 +69,7 @@ class SearchSessionResultsPage extends StatelessWidget {
                           SearchResultEntry searchResultEntry =
                               searchResultEntries[index];
                           return ListTile(
-                            // Search result entry title + copy title button
+                            // Search result entry title + checkbox
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,22 +97,11 @@ class SearchSessionResultsPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                RawMaterialButton(
-                                  onPressed: () async => {
-                                    await Clipboard.setData(ClipboardData(
-                                        text: searchResultEntry.title))
+                                SearchResultEntryCheckbox(
+                                  initialValue: false,
+                                  onChanged: (bool? val) {
+                                    searchResultEntry.isSelected = val!;
                                   },
-                                  padding: const EdgeInsets.all(0),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  child: const Icon(
-                                    Icons.copy,
-                                    size: 12,
-                                  ),
                                 ),
                               ],
                             ),

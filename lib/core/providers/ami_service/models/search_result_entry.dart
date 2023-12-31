@@ -16,6 +16,8 @@ class SearchResultEntry {
   /// E.g. "en.wikipedia.org".
   final String site;
 
+  bool isSelected = false;
+
   factory SearchResultEntry.fromDto(SearchResultEntryDto dto) {
     return SearchResultEntry(
       title: dto.title,

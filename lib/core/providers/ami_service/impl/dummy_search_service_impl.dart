@@ -306,7 +306,7 @@ class DummySearchServiceImpl extends SearchService {
 
   @override
   Future<SearchResults> searchWithKeyword(String keyword) async {
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 200));
     if (keyword.contains('long')) {
       return SearchResults(
         serviceProvider: 'Google',

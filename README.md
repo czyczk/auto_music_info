@@ -22,8 +22,11 @@ samples, guidance on mobile development, and a full API reference.
 - Add a dropdown to select a text language on the keyword page.
 - Different font (and fallbacks) for different text languages. Support
   customization via JSON config.
-- Check blank queries of the keyword page.
-- Check illegal characters in queries of the keyword page.
+- [x] Check blank queries of the keyword page.
+- [x] Check illegal characters in queries of the keyword page.
+- [x] Add the ability to extract music info for the selected search result entries and a page to show the extracted
+  info.
+- Fix: SearchResultPage: checkbox states not preserved after switching left or right or scrolling down.
 
 ### Milestone 2
 

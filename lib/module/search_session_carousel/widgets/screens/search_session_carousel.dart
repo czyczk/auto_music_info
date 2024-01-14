@@ -2,7 +2,8 @@ import 'package:auto_music_info/core/common/utils/id_util.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
 import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_session_page_switcher.dart';
 import 'package:auto_music_info/module/search_session_carousel/widgets/screens/search_session_keyword_page.dart';
-import 'package:auto_music_info/module/search_session_carousel/widgets/screens/search_session_results_page.dart';
+import 'package:auto_music_info/module/search_session_carousel/widgets/screens/search_session_music_info_results_page.dart';
+import 'package:auto_music_info/module/search_session_carousel/widgets/screens/search_session_search_results_page.dart';
 import 'package:flutter/material.dart';
 
 class SearchSessionCarousel extends StatefulWidget {
@@ -78,6 +79,8 @@ class _SearchSessionCarouselState extends State<SearchSessionCarousel>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    final updateActivePageFunc = getUpdateActivePageFunc();
     return ValueListenableBuilder<int>(
       valueListenable: _activePageNotifier,
       builder: (BuildContext context, int activePage, Widget? child) {
@@ -100,9 +103,16 @@ class _SearchSessionCarouselState extends State<SearchSessionCarousel>
               children: [
                 SearchSessionKeywordPage(
                   searchSession: widget.searchSession,
-                  updateActivePageFunc: getUpdateActivePageFunc(),
+                  updateActivePageFunc: updateActivePageFunc,
                 ),
-                SearchSessionResultsPage(searchSession: widget.searchSession),
+                SearchSessionSearchResultsPage(
+                  searchSession: widget.searchSession,
+                  updateActivePageFunc: updateActivePageFunc,
+                ),
+                SearchSessionMusicInfoResultsPage(
+                  searchSession: widget.searchSession,
+                  updateActivePageFunc: updateActivePageFunc,
+                ),
               ],
             ),
           ),

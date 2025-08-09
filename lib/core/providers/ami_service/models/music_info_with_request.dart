@@ -7,12 +7,14 @@ class MusicInfoWithRequest {
   final String query;
   final MusicInfoSourceEnum source;
   final MusicInfo musicInfo;
+  final String? think;
 
   MusicInfoWithRequest({
     required this.url,
     required this.query,
     required this.source,
     required this.musicInfo,
+    this.think,
   });
 
   factory MusicInfoWithRequest.fromDto(MusicInfoWithRequestDto dto) {
@@ -21,6 +23,7 @@ class MusicInfoWithRequest {
       query: dto.query,
       source: MusicInfoSourceEnum.fromServerCode(dto.source),
       musicInfo: MusicInfo.fromDto(dto.musicInfo),
+      think: dto.think,
     );
   }
 }

@@ -16,37 +16,29 @@ class SearchServiceImpl extends SearchService {
   @override
   Future<SearchResults> searchWithKeyword(String keyword) async {
     final resp = await _httpClient.post(
-      Uri.parse('${appConfig.serverEndpoint}/api/v1/search/integrated'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'query': keyword,
-      }),
+      Uri.parse('${appConfig.serverEndpoint}/api/v1/search/google/integrated'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'query': keyword}),
     );
     final respBody = utf8.decode(resp.bodyBytes);
 
     if (resp.statusCode != 200) {
       throw Exception(
-          'Failed to search with keyword; keyword: $keyword; statusCode: ${resp
-              .statusCode}; body: ${respBody.isEmpty ? '<empty>' : respBody}');
+        'Failed to search with keyword; keyword: $keyword; statusCode: ${resp.statusCode}; body: ${respBody.isEmpty ? '<empty>' : respBody}',
+      );
     }
 
     final respJson = jsonDecode(respBody);
     final respDto = ServerMessageDto.fromJson(respJson);
     if (respDto.error != null) {
       throw Exception(
-          'Failed to search with keyword because of server error; keyword: $keyword; errorCode: ${respDto
-              .error!.errorCode}; errorMessage: ${respDto.error!.message}');
+        'Failed to search with keyword because of server error; keyword: $keyword; errorCode: ${respDto.error!.errorCode}; errorMessage: ${respDto.error!.message}',
+      );
     }
 
     final dtoMap = Map<String, SearchResultDto>.fromEntries(
       (respDto.data as Map).entries.map(
-            (entry) =>
-            MapEntry(
-              entry.key,
-              SearchResultDto.fromJson(entry.value),
-            ),
+        (entry) => MapEntry(entry.key, SearchResultDto.fromJson(entry.value)),
       ),
     );
     return SearchResults.fromIntegratedDto(dtoMap);

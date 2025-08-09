@@ -9,12 +9,14 @@ class MusicInfoWithRequestDto {
   final String query;
   final String source;
   final MusicInfoDto musicInfo;
+  final String? think;
 
   MusicInfoWithRequestDto({
     required this.url,
     required this.query,
     required this.source,
     required this.musicInfo,
+    this.think,
   });
 
   factory MusicInfoWithRequestDto.fromJson(Map<String, dynamic> json) =>

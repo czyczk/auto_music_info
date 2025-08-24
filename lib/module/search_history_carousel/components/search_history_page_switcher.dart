@@ -23,7 +23,7 @@ class SearchHistoryPageSwitcher extends StatelessWidget {
     if (colorSet == null) {
       return context.theme.colorSchemeExtended.primary;
     } else {
-      return colorSet!.background;
+      return colorSet!.surface;
     }
   }
 
@@ -47,16 +47,17 @@ class SearchHistoryPageSwitcher extends StatelessWidget {
             child:
                 // Back button
                 Container(
-              padding: EdgeInsets.only(
-                left:
-                    context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges,
-              ),
-              child: PageSwitcherButton(
-                icon: Icons.arrow_back,
-                onPressed: onBackButtonPressed,
-                determineButtonEnabled: () => true,
-              ),
-            ),
+                  padding: EdgeInsets.only(
+                    left: context
+                        .appGlobalStyles
+                        .pageSwitcherButtonSpacingFromEdges,
+                  ),
+                  child: PageSwitcherButton(
+                    icon: Icons.arrow_back,
+                    onPressed: onBackButtonPressed,
+                    determineButtonEnabled: () => true,
+                  ),
+                ),
           ),
           Align(
             alignment: Alignment.center,

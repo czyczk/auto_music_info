@@ -81,20 +81,24 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
 
       // Check text validity
       // TextLanguage: todo
-      TextValidityResult textValidityResult =
-          await textCheckerService.checkTextValidity(
-              keywordTextController.text, TextLanguageEnum.notSpecified);
+      TextValidityResult textValidityResult = await textCheckerService
+          .checkTextValidity(
+            keywordTextController.text,
+            TextLanguageEnum.notSpecified,
+          );
       if (!textValidityResult.isValid) {
         bool shouldContinue = await _showPopupDialogOnInvalidTextCheckerResult(
-            textValidityResult);
+          textValidityResult,
+        );
         if (!shouldContinue) {
           return;
         }
       }
 
       // Search
-      SearchResults searchResults =
-          await searchService.searchWithKeyword(enteredKeyword);
+      SearchResults searchResults = await searchService.searchWithKeyword(
+        enteredKeyword,
+      );
 
       setState(() {
         // Push forward after a successful search.
@@ -109,17 +113,19 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
             SearchSessionPhaseEnum.phaseSearchResults;
         widget.searchSession.phaseSearchResultsInfo =
             SearchSessionPhaseSearchResultsInfo.ofResults(
-                query: searchResults.query,
-                correctedQuery: searchResults.correctedQuery,
-                searchResultsMap: searchResults.resultMap);
+              query: searchResults.query,
+              correctedQuery: searchResults.correctedQuery,
+              searchResultsMap: searchResults.resultMap,
+            );
       });
     } catch (e, stackTrace) {
       debugPrintStack(stackTrace: stackTrace);
       scaffoldMessengerState.showSnackBar(
         SnackBar(
           duration: const Duration(seconds: 5),
-          content:
-              AmiTextStyle(child: Text('Failed to search: ${e.toString()}')),
+          content: AmiTextStyle(
+            child: Text('Failed to search: ${e.toString()}'),
+          ),
         ),
       );
     } finally {
@@ -136,19 +142,21 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
     TextValidityResult textValidityResult,
   ) async {
     bool? shouldContinue = await showAdaptiveDialog(
-        context: context,
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return PopupDialog(
-            title: 'Possible unwanted character found',
-            message: 'Invalid char: ${textValidityResult.invalidChar}\n'
-                'Code point: 0x${textValidityResult.invalidChar!.codeUnits.first.toRadixString(16)}\n'
-                'Reason: ${textValidityResult.invalidReason}',
-            onOk: () => Navigator.of(context).pop(true),
-            onCancel: () => Navigator.of(context).pop(false),
-            okText: 'Proceed',
-          );
-        });
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return PopupDialog(
+          title: 'Possible unwanted character found',
+          message:
+              'Invalid char: ${textValidityResult.invalidChar}\n'
+              'Code point: 0x${textValidityResult.invalidChar!.codeUnits.first.toRadixString(16)}\n'
+              'Reason: ${textValidityResult.invalidReason}',
+          onOk: () => Navigator.of(context).pop(true),
+          onCancel: () => Navigator.of(context).pop(false),
+          okText: 'Proceed',
+        );
+      },
+    );
 
     if (kDebugMode) {
       print('shouldContinue: $shouldContinue');
@@ -159,17 +167,23 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
   @override
   Widget build(BuildContext context) {
     SearchService searchService = Provider.of<SearchService>(context);
-    TextCheckerService textCheckerService =
-        Provider.of<TextCheckerService>(context);
+    TextCheckerService textCheckerService = Provider.of<TextCheckerService>(
+      context,
+    );
 
     if (keywordTextController.text.isEmpty) {
       keywordTextController.text = widget.searchSession.phaseKeywordInfo.query;
     }
 
     return Container(
-        color: Color.lerp(
-            context.theme.colorSchemeExtended.background, Colors.white, 0.42),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      color: Color.lerp(
+        context.theme.colorSchemeExtended.surface,
+        Colors.white,
+        0.42,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
           Container(
             padding: const EdgeInsets.only(bottom: 32),
             child: Image.asset(
@@ -178,71 +192,74 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
               fit: BoxFit.fitWidth,
             ),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ConstrainedBox(
-              constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
-              child: RawKeyboardListener(
-                focusNode: FocusNode(),
-                onKey: (event) => {
-                  if (event is RawKeyDownEvent &&
-                      event.logicalKey == LogicalKeyboardKey.enter)
-                    _submitKeyword(
-                      searchService,
-                      textCheckerService,
-                      ScaffoldMessenger.of(context),
-                    ),
-                },
-                child: AmiTextStyle(
-                  // TODO depends on the text language of the session.
-                  textLanguage: null,
-                  child: TextField(
-                    controller: keywordTextController,
-                    focusNode: textFieldFocusNode,
-                    enabled: !isDebouncing,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.3),
-                      enabledBorder: const OutlineInputBorder(),
-                      focusedBorder: const OutlineInputBorder(),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: context
-                              .theme.colorSchemeExtended.onPrimaryDisabled,
-                        ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(minWidth: 100, maxWidth: 600),
+                child: RawKeyboardListener(
+                  focusNode: FocusNode(),
+                  onKey: (event) => {
+                    if (event is RawKeyDownEvent &&
+                        event.logicalKey == LogicalKeyboardKey.enter)
+                      _submitKeyword(
+                        searchService,
+                        textCheckerService,
+                        ScaffoldMessenger.of(context),
                       ),
-                      hintText: 'Enter keyword to search',
-                      hintStyle: TextStyle(
-                        color: context.theme.colorSchemeExtended.onBackground,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
+                  },
+                  child: AmiTextStyle(
+                    // TODO depends on the text language of the session.
+                    textLanguage: null,
+                    child: TextField(
+                      controller: keywordTextController,
+                      focusNode: textFieldFocusNode,
+                      enabled: !isDebouncing,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white.withValues(alpha: 0.3),
+                        enabledBorder: const OutlineInputBorder(),
+                        focusedBorder: const OutlineInputBorder(),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: context
+                                .theme
+                                .colorSchemeExtended
+                                .onPrimaryDisabled,
+                          ),
+                        ),
+                        hintText: 'Enter keyword to search',
+                        hintStyle: TextStyle(
+                          color: context.theme.colorSchemeExtended.onSurface,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 16),
-              child: IconButton(
-                key: keySearchButton,
-                icon: const Icon(
-                  Icons.search,
-                  size: 28,
-                ),
-                onPressed: () => _submitKeyword(
-                  searchService,
-                  textCheckerService,
-                  ScaffoldMessenger.of(context),
+              Container(
+                padding: const EdgeInsets.only(left: 16),
+                child: IconButton(
+                  key: keySearchButton,
+                  icon: const Icon(Icons.search, size: 28),
+                  onPressed: () => _submitKeyword(
+                    searchService,
+                    textCheckerService,
+                    ScaffoldMessenger.of(context),
+                  ),
                 ),
               ),
-            )
-          ]),
+            ],
+          ),
           AmiTextStyle(
-              child: Text(widget.searchSession.activePhase.toString())),
+            child: Text(widget.searchSession.activePhase.toString()),
+          ),
           // A spacer to push the main content up a little.
-          const SizedBox(
-            height: 64,
-          )
-        ]));
+          const SizedBox(height: 64),
+        ],
+      ),
+    );
   }
 }

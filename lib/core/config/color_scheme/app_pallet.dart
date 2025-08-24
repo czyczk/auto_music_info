@@ -12,13 +12,13 @@ abstract class AppPalette {
 abstract class ColorSet {
   const ColorSet();
 
-  Color get background;
+  Color get surface;
 
-  Color get backgroundHover;
+  Color get surfaceHover;
 
-  Color get backgroundActive;
+  Color get surfaceActive;
 
-  Color get backgroundDisabled;
+  Color get surfaceDisabled;
 
   Color get foreground;
 
@@ -33,13 +33,13 @@ class _DarkGrayBlueColors extends ColorSet {
   const _DarkGrayBlueColors();
 
   @override
-  final background = const Color(0xFF1A2D40);
+  final surface = const Color(0xFF1A2D40);
   @override
-  final backgroundHover = const Color(0xFF2E445C);
+  final surfaceHover = const Color(0xFF2E445C);
   @override
-  final backgroundActive = const Color(0xFF253B52);
+  final surfaceActive = const Color(0xFF253B52);
   @override
-  final backgroundDisabled = const Color(0xFF353535);
+  final surfaceDisabled = const Color(0xFF353535);
 
   @override
   final foreground = const Color(0xFF9EA5AC);
@@ -56,13 +56,13 @@ class _DarkGrayerBlueColors extends ColorSet {
   const _DarkGrayerBlueColors();
 
   @override
-  final background = const Color(0xFF343A40);
+  final surface = const Color(0xFF343A40);
   @override
-  final backgroundHover = const Color(0xFF4B535C);
+  final surfaceHover = const Color(0xFF4B535C);
   @override
-  final backgroundActive = const Color(0xFF434A52);
+  final surfaceActive = const Color(0xFF434A52);
   @override
-  final backgroundDisabled = const Color(0xFF3A3A3A);
+  final surfaceDisabled = const Color(0xFF3A3A3A);
 
   @override
   final foreground = const Color(0xFF9EA5AC);
@@ -78,13 +78,13 @@ class _DeepGrayGreenColors extends ColorSet {
   const _DeepGrayGreenColors();
 
   @override
-  final background = const Color(0xFF294135);
+  final surface = const Color(0xFF294135);
   @override
-  final backgroundHover = const Color(0xFF475C51);
+  final surfaceHover = const Color(0xFF475C51);
   @override
-  final backgroundActive = const Color(0xFF3B5146);
+  final surfaceActive = const Color(0xFF3B5146);
   @override
-  final backgroundDisabled = const Color(0xFF353535);
+  final surfaceDisabled = const Color(0xFF353535);
 
   @override
   final foreground = const Color(0xFF9EACA5);
@@ -100,13 +100,13 @@ class _CoolGrayColors extends ColorSet {
   const _CoolGrayColors();
 
   @override
-  final background = const Color(0xFFECEDF3);
+  final surface = const Color(0xFFECEDF3);
   @override
-  final backgroundHover = const Color(0xFFF5F6FB);
+  final surfaceHover = const Color(0xFFF5F6FB);
   @override
-  final backgroundActive = const Color(0xFFDCDDE3);
+  final surfaceActive = const Color(0xFFDCDDE3);
   @override
-  final backgroundDisabled = const Color(0xFFEAEAEA);
+  final surfaceDisabled = const Color(0xFFEAEAEA);
 
   @override
   final foreground = const Color(0xFF525252);
@@ -122,13 +122,13 @@ class _WarmGrayColors extends ColorSet {
   const _WarmGrayColors();
 
   @override
-  final background = const Color(0xFFF4F4F5);
+  final surface = const Color(0xFFF4F4F5);
   @override
-  final backgroundHover = const Color(0xFFE9E9EA);
+  final surfaceHover = const Color(0xFFE9E9EA);
   @override
-  final backgroundActive = const Color(0xFFE0E0E1);
+  final surfaceActive = const Color(0xFFE0E0E1);
   @override
-  final backgroundDisabled = const Color(0xFFEAEAEA);
+  final surfaceDisabled = const Color(0xFFEAEAEA);
 
   @override
   final foreground = const Color(0xFF525252);
@@ -144,13 +144,13 @@ class _ModerateVividOrangeColors extends ColorSet {
   const _ModerateVividOrangeColors();
 
   @override
-  final background = const Color(0xFFE57E31);
+  final surface = const Color(0xFFE57E31);
   @override
-  final backgroundHover = const Color(0xFFF48D38);
+  final surfaceHover = const Color(0xFFF48D38);
   @override
-  final backgroundActive = const Color(0xFFDF782B);
+  final surfaceActive = const Color(0xFFDF782B);
   @override
-  final backgroundDisabled = const Color(0xFF5E5E5E);
+  final surfaceDisabled = const Color(0xFF5E5E5E);
 
   @override
   final foreground = const Color(0xFFE8E7E6);

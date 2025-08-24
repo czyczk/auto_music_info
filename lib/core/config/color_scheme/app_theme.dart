@@ -7,74 +7,75 @@ class AppTheme {
    * Light theme
    */
 
-  static final light = ThemeData.light().copyWith(extensions: [
-    _lightAppColorSchemeExtended,
-  ]);
+  static final light = ThemeData.light().copyWith(
+    extensions: [_lightAppColorSchemeExtended],
+  );
 
   static final _lightAppColorSchemeExtended = AppColorsExtension(
     // Primary: Dark gray blue
-    primary: AppPalette.darkGrayBlue.background,
-    primaryHover: AppPalette.darkGrayBlue.backgroundHover,
-    primaryActive: AppPalette.darkGrayBlue.backgroundActive,
-    primaryDisabled: AppPalette.darkGrayBlue.backgroundDisabled,
+    primary: AppPalette.darkGrayBlue.surface,
+    primaryHover: AppPalette.darkGrayBlue.surfaceHover,
+    primaryActive: AppPalette.darkGrayBlue.surfaceActive,
+    primaryDisabled: AppPalette.darkGrayBlue.surfaceDisabled,
     onPrimary: AppPalette.darkGrayBlue.foreground,
     onPrimaryHover: AppPalette.darkGrayBlue.foregroundHover,
     onPrimaryActive: AppPalette.darkGrayBlue.foregroundActive,
     onPrimaryDisabled: AppPalette.darkGrayBlue.foregroundDisabled,
     // Secondary: Dark gray green
-    secondary: AppPalette.darkGrayGreen.background,
-    secondaryHover: AppPalette.darkGrayGreen.backgroundHover,
-    secondaryActive: AppPalette.darkGrayGreen.backgroundActive,
-    secondaryDisabled: AppPalette.darkGrayGreen.backgroundDisabled,
+    secondary: AppPalette.darkGrayGreen.surface,
+    secondaryHover: AppPalette.darkGrayGreen.surfaceHover,
+    secondaryActive: AppPalette.darkGrayGreen.surfaceActive,
+    secondaryDisabled: AppPalette.darkGrayGreen.surfaceDisabled,
     onSecondary: AppPalette.darkGrayGreen.foreground,
     onSecondaryHover: AppPalette.darkGrayGreen.foregroundHover,
     onSecondaryActive: AppPalette.darkGrayGreen.foregroundActive,
     onSecondaryDisabled: AppPalette.darkGrayGreen.foregroundDisabled,
     // Tertiary: Moderate vivid orange
-    tertiary: AppPalette.moderateVividOrange.background,
-    tertiaryHover: AppPalette.moderateVividOrange.backgroundHover,
-    tertiaryActive: AppPalette.moderateVividOrange.backgroundActive,
-    tertiaryDisabled: AppPalette.moderateVividOrange.backgroundDisabled,
+    tertiary: AppPalette.moderateVividOrange.surface,
+    tertiaryHover: AppPalette.moderateVividOrange.surfaceHover,
+    tertiaryActive: AppPalette.moderateVividOrange.surfaceActive,
+    tertiaryDisabled: AppPalette.moderateVividOrange.surfaceDisabled,
     onTertiary: AppPalette.moderateVividOrange.foreground,
     onTertiaryHover: AppPalette.moderateVividOrange.foregroundHover,
     onTertiaryActive: AppPalette.moderateVividOrange.foregroundActive,
     onTertiaryDisabled: AppPalette.moderateVividOrange.foregroundDisabled,
     // Quaternary: Light gray
-    quaternary: AppPalette.coolGray.background,
-    quaternaryHover: AppPalette.coolGray.backgroundHover,
-    quaternaryActive: AppPalette.coolGray.backgroundActive,
-    quaternaryDisabled: AppPalette.coolGray.backgroundDisabled,
+    quaternary: AppPalette.coolGray.surface,
+    quaternaryHover: AppPalette.coolGray.surfaceHover,
+    quaternaryActive: AppPalette.coolGray.surfaceActive,
+    quaternaryDisabled: AppPalette.coolGray.surfaceDisabled,
     onQuaternary: AppPalette.coolGray.foreground,
     onQuaternaryHover: AppPalette.coolGray.foregroundHover,
     onQuaternaryActive: AppPalette.coolGray.foregroundActive,
     onQuaternaryDisabled: AppPalette.coolGray.foregroundDisabled,
     // Other
-    background: AppPalette.coolGray.background,
-    onBackground: AppPalette.coolGray.foreground,
-    surface: Colors.white,
-    onSurface: Colors.black,
+    surface: AppPalette.coolGray.surface,
+    onSurface: AppPalette.coolGray.foreground,
   );
 
-  static final lightColorScheme =
-      _getColorSchemeBasedOnSeed(Colors.indigo, _lightAppColorSchemeExtended);
+  static final lightColorScheme = _getColorSchemeBasedOnSeed(
+    Colors.indigo,
+    _lightAppColorSchemeExtended,
+  );
 
   static ColorScheme _getColorSchemeBasedOnSeed(
-      Color seedColor, AppColorsExtension appColors) {
+    Color seedColor,
+    AppColorsExtension appColors,
+  ) {
     ColorScheme baseColorScheme = ColorScheme.fromSeed(seedColor: seedColor);
     return ColorScheme(
-        brightness: Brightness.light,
-        primary: appColors.primary,
-        onPrimary: appColors.onPrimary,
-        secondary: appColors.secondary,
-        onSecondary: appColors.onSecondary,
-        tertiary: appColors.tertiary,
-        onTertiary: appColors.onTertiary,
-        error: baseColorScheme.error,
-        onError: baseColorScheme.onError,
-        background: appColors.background,
-        onBackground: appColors.onBackground,
-        surface: appColors.surface,
-        onSurface: appColors.onSurface);
+      brightness: Brightness.light,
+      primary: appColors.primary,
+      onPrimary: appColors.onPrimary,
+      secondary: appColors.secondary,
+      onSecondary: appColors.onSecondary,
+      tertiary: appColors.tertiary,
+      onTertiary: appColors.onTertiary,
+      error: baseColorScheme.error,
+      onError: baseColorScheme.onError,
+      surface: appColors.surface,
+      onSurface: appColors.onSurface,
+    );
   }
 }
 

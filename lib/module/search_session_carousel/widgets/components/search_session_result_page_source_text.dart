@@ -16,7 +16,7 @@ class SearchSessionResultPageSourceText extends StatelessWidget {
       child: Text(
         sourceDisplayText,
         style: TextStyle(
-          color: context.theme.colorSchemeExtended.onBackground,
+          color: context.theme.colorSchemeExtended.onSurface,
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),

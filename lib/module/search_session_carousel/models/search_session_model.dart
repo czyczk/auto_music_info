@@ -1,4 +1,5 @@
 import 'package:auto_music_info/core/common/models/wrapped_data.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/failed_music_info_result_exception.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/music_info_with_request.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
@@ -44,16 +45,19 @@ class SearchSessionPhaseSearchResultsInfo {
     searchResultsMap = {};
   }
 
-  SearchSessionPhaseSearchResultsInfo.ofPending(
-      {required this.query, this.correctedQuery}) {
+  SearchSessionPhaseSearchResultsInfo.ofPending({
+    required this.query,
+    this.correctedQuery,
+  }) {
     isCompleted = false;
     searchResultsMap = {};
   }
 
-  SearchSessionPhaseSearchResultsInfo.ofResults(
-      {required this.query,
-      this.correctedQuery,
-      required this.searchResultsMap}) {
+  SearchSessionPhaseSearchResultsInfo.ofResults({
+    required this.query,
+    this.correctedQuery,
+    required this.searchResultsMap,
+  }) {
     isCompleted = true;
   }
 
@@ -72,7 +76,7 @@ class SearchSessionPhaseMusicInfoResultsInfo {
   late int successCount;
   late int failureCount;
   late Map<SearchSourceEnum, List<WrappedData<MusicInfoWithRequest>?>>
-      musicInfoMap;
+  musicInfoMap;
 
   SearchSessionPhaseMusicInfoResultsInfo.ofEmpty() {
     query = "";
@@ -85,10 +89,11 @@ class SearchSessionPhaseMusicInfoResultsInfo {
     musicInfoMap = {};
   }
 
-  SearchSessionPhaseMusicInfoResultsInfo.ofPending(
-      {required this.query,
-      this.correctedQuery,
-      required this.selectedEntries}) {
+  SearchSessionPhaseMusicInfoResultsInfo.ofPending({
+    required this.query,
+    this.correctedQuery,
+    required this.selectedEntries,
+  }) {
     isCompleted = false;
     totalCount = selectedEntries.values
         .map((list) => list.length)
@@ -99,21 +104,47 @@ class SearchSessionPhaseMusicInfoResultsInfo {
     musicInfoMap = {
       for (var k in selectedEntries.keys)
         k: List<WrappedData<MusicInfoWithRequest>?>.filled(
-            selectedEntries[k]!.length, null)
+          selectedEntries[k]!.length,
+          null,
+        ),
     };
   }
 
   fillSuccessfulResult(
-      SearchSourceEnum source, int index, MusicInfoWithRequest musicInfo) {
+    SearchSourceEnum source,
+    int index,
+    MusicInfoWithRequest musicInfo,
+  ) {
     musicInfoMap[source]![index] = WrappedData.ofData(musicInfo);
     successCount += 1;
     _tryFinalize();
   }
 
-  fillFailedResult(SearchSourceEnum source, int index, Exception exception) {
-    musicInfoMap[source]![index] = WrappedData.ofException(exception);
+  fillFailedResult(
+    SearchSourceEnum source,
+    int index,
+    // The url is preserved so it can be retried.
+    String url,
+    Exception exception,
+  ) {
+    var failedMusicInfoResultException = FailedMusicInfoResultException(
+      cause: exception,
+      searchSource: source,
+      index: index,
+      url: url,
+    );
+    musicInfoMap[source]![index] = WrappedData.ofException(
+      failedMusicInfoResultException,
+    );
     failureCount += 1;
     _tryFinalize();
+  }
+
+  revokeFailureCount() {
+    if (failureCount > 0) {
+      failureCount -= 1;
+      isCompleted = false;
+    }
   }
 
   bool _tryFinalize() {

@@ -34,8 +34,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.onQuaternaryHover,
     required this.onQuaternaryActive,
     required this.onQuaternaryDisabled,
-    required this.background,
-    required this.onBackground,
     required this.surface,
     required this.onSurface,
   });
@@ -72,8 +70,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color onQuaternaryHover;
   final Color onQuaternaryActive;
   final Color onQuaternaryDisabled;
-  final Color background;
-  final Color onBackground;
   final Color surface;
   final Color onSurface;
 
@@ -111,8 +107,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     Color? onQuaternaryHover,
     Color? onQuaternaryActive,
     Color? onQuaternaryDisabled,
-    Color? background,
-    Color? onBackground,
     Color? surface,
     Color? onSurface,
   }) {
@@ -149,8 +143,6 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       onQuaternaryHover: onQuaternaryHover ?? this.onQuaternaryHover,
       onQuaternaryActive: onQuaternaryActive ?? this.onQuaternaryActive,
       onQuaternaryDisabled: onQuaternaryDisabled ?? this.onQuaternaryDisabled,
-      background: background ?? this.background,
-      onBackground: onBackground ?? this.onBackground,
       surface: surface ?? this.surface,
       onSurface: onSurface ?? this.onSurface,
     );
@@ -158,7 +150,9 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
 
   @override
   ThemeExtension<AppColorsExtension> lerp(
-      covariant ThemeExtension<AppColorsExtension>? other, double t) {
+    covariant ThemeExtension<AppColorsExtension>? other,
+    double t,
+  ) {
     if (other == null || other is! AppColorsExtension) {
       return this;
     }
@@ -171,46 +165,83 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
       onPrimaryHover: Color.lerp(onPrimaryHover, other.onPrimaryHover, t)!,
       onPrimaryActive: Color.lerp(onPrimaryActive, other.onPrimaryActive, t)!,
-      onPrimaryDisabled:
-          Color.lerp(onPrimaryDisabled, other.onPrimaryDisabled, t)!,
+      onPrimaryDisabled: Color.lerp(
+        onPrimaryDisabled,
+        other.onPrimaryDisabled,
+        t,
+      )!,
       secondary: Color.lerp(secondary, other.secondary, t)!,
       secondaryHover: Color.lerp(secondaryHover, other.secondaryHover, t)!,
       secondaryActive: Color.lerp(secondaryActive, other.secondaryActive, t)!,
-      secondaryDisabled:
-          Color.lerp(secondaryDisabled, other.secondaryDisabled, t)!,
+      secondaryDisabled: Color.lerp(
+        secondaryDisabled,
+        other.secondaryDisabled,
+        t,
+      )!,
       onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
-      onSecondaryHover:
-          Color.lerp(onSecondaryHover, other.onSecondaryHover, t)!,
-      onSecondaryActive:
-          Color.lerp(onSecondaryActive, other.onSecondaryActive, t)!,
-      onSecondaryDisabled:
-          Color.lerp(onSecondaryDisabled, other.onSecondaryDisabled, t)!,
+      onSecondaryHover: Color.lerp(
+        onSecondaryHover,
+        other.onSecondaryHover,
+        t,
+      )!,
+      onSecondaryActive: Color.lerp(
+        onSecondaryActive,
+        other.onSecondaryActive,
+        t,
+      )!,
+      onSecondaryDisabled: Color.lerp(
+        onSecondaryDisabled,
+        other.onSecondaryDisabled,
+        t,
+      )!,
       tertiary: Color.lerp(tertiary, other.tertiary, t)!,
       tertiaryHover: Color.lerp(tertiaryHover, other.tertiaryHover, t)!,
       tertiaryActive: Color.lerp(tertiaryActive, other.tertiaryActive, t)!,
-      tertiaryDisabled:
-          Color.lerp(tertiaryDisabled, other.tertiaryDisabled, t)!,
+      tertiaryDisabled: Color.lerp(
+        tertiaryDisabled,
+        other.tertiaryDisabled,
+        t,
+      )!,
       onTertiary: Color.lerp(onTertiary, other.onTertiary, t)!,
       onTertiaryHover: Color.lerp(onTertiaryHover, other.onTertiaryHover, t)!,
-      onTertiaryActive:
-          Color.lerp(onTertiaryActive, other.onTertiaryActive, t)!,
-      onTertiaryDisabled:
-          Color.lerp(onTertiaryDisabled, other.onTertiaryDisabled, t)!,
+      onTertiaryActive: Color.lerp(
+        onTertiaryActive,
+        other.onTertiaryActive,
+        t,
+      )!,
+      onTertiaryDisabled: Color.lerp(
+        onTertiaryDisabled,
+        other.onTertiaryDisabled,
+        t,
+      )!,
       quaternary: Color.lerp(quaternary, other.quaternary, t)!,
       quaternaryHover: Color.lerp(quaternaryHover, other.quaternaryHover, t)!,
-      quaternaryActive:
-          Color.lerp(quaternaryActive, other.quaternaryActive, t)!,
-      quaternaryDisabled:
-          Color.lerp(quaternaryDisabled, other.quaternaryDisabled, t)!,
+      quaternaryActive: Color.lerp(
+        quaternaryActive,
+        other.quaternaryActive,
+        t,
+      )!,
+      quaternaryDisabled: Color.lerp(
+        quaternaryDisabled,
+        other.quaternaryDisabled,
+        t,
+      )!,
       onQuaternary: Color.lerp(onQuaternary, other.onQuaternary, t)!,
-      onQuaternaryHover:
-          Color.lerp(onQuaternaryHover, other.onQuaternaryHover, t)!,
-      onQuaternaryActive:
-          Color.lerp(onQuaternaryActive, other.onQuaternaryActive, t)!,
-      onQuaternaryDisabled:
-          Color.lerp(onQuaternaryDisabled, other.onQuaternaryDisabled, t)!,
-      background: Color.lerp(background, other.background, t)!,
-      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
+      onQuaternaryHover: Color.lerp(
+        onQuaternaryHover,
+        other.onQuaternaryHover,
+        t,
+      )!,
+      onQuaternaryActive: Color.lerp(
+        onQuaternaryActive,
+        other.onQuaternaryActive,
+        t,
+      )!,
+      onQuaternaryDisabled: Color.lerp(
+        onQuaternaryDisabled,
+        other.onQuaternaryDisabled,
+        t,
+      )!,
       surface: Color.lerp(surface, other.surface, t)!,
       onSurface: Color.lerp(onSurface, other.onSurface, t)!,
     );

@@ -3,10 +3,7 @@ class WrappedData<T> {
   final T? data;
   final Exception? exception;
 
-  WrappedData({
-    this.data,
-    this.exception,
-  });
+  WrappedData({this.data, this.exception});
 
   factory WrappedData.ofData(T data) {
     return WrappedData<T>(data: data);

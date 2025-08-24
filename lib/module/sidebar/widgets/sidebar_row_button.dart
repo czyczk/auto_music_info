@@ -4,13 +4,13 @@ import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:flutter/material.dart';
 
 class SidebarRowButton extends StatefulWidget {
-  const SidebarRowButton(
-      {Key? key,
-      required this.icon,
-      required this.text,
-      required this.onTap,
-      this.colorSet})
-      : super(key: key);
+  const SidebarRowButton({
+    Key? key,
+    required this.icon,
+    required this.text,
+    required this.onTap,
+    this.colorSet,
+  }) : super(key: key);
 
   final IconData icon;
 
@@ -36,9 +36,9 @@ class _SidebarItemState extends State<SidebarRowButton> {
       }
     } else {
       if (_isHovered) {
-        return widget.colorSet!.backgroundHover;
+        return widget.colorSet!.surfaceHover;
       } else {
-        return widget.colorSet!.background;
+        return widget.colorSet!.surface;
       }
     }
   }
@@ -62,29 +62,32 @@ class _SidebarItemState extends State<SidebarRowButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-        onEnter: (event) => setState(() => _isHovered = true),
-        onExit: (event) => setState(() => _isHovered = false),
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeOutQuad,
-            constraints: const BoxConstraints(minWidth: 200, minHeight: 60),
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            color: _determineBackgroundColor(context.theme),
-            child: Center(
-                child: ListTile(
-              leading: Icon(
-                widget.icon,
-                color: _determineForegroundColor(context.theme),
-              ),
-              title: AmiTextStyle(
-                child: Text(
-                  widget.text,
-                  style: TextStyle(
-                    color: _determineForegroundColor(context.theme),
-                  ),
+      onEnter: (event) => setState(() => _isHovered = true),
+      onExit: (event) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOutQuad,
+        constraints: const BoxConstraints(minWidth: 200, minHeight: 60),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        color: _determineBackgroundColor(context.theme),
+        child: Center(
+          child: ListTile(
+            leading: Icon(
+              widget.icon,
+              color: _determineForegroundColor(context.theme),
+            ),
+            title: AmiTextStyle(
+              child: Text(
+                widget.text,
+                style: TextStyle(
+                  color: _determineForegroundColor(context.theme),
                 ),
               ),
-              onTap: () => widget.onTap(),
-            ))));
+            ),
+            onTap: () => widget.onTap(),
+          ),
+        ),
+      ),
+    );
   }
 }

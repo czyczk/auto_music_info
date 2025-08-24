@@ -51,10 +51,15 @@ class _SearchSessionSearchResultsPageState
     try {
       // Filter out the selected entries while preserving the map structure.
       final selectedEntries = widget
-          .searchSession.phaseSearchResultsInfo.searchResultsMap
+          .searchSession
+          .phaseSearchResultsInfo
+          .searchResultsMap
           .map((k, v) {
-        return MapEntry(k, v.where((element) => element.isSelected).toList());
-      });
+            return MapEntry(
+              k,
+              v.where((element) => element.isSelected).toList(),
+            );
+          });
       if (kDebugMode) {
         final totalCount = selectedEntries.values
             .map((list) => list.length)
@@ -67,11 +72,11 @@ class _SearchSessionSearchResultsPageState
       // Info will be fetched and extracted in the next phase.
       widget.searchSession.phaseMusicInfoResultsInfo =
           SearchSessionPhaseMusicInfoResultsInfo.ofPending(
-        query: widget.searchSession.phaseSearchResultsInfo.query,
-        correctedQuery:
-            widget.searchSession.phaseSearchResultsInfo.correctedQuery,
-        selectedEntries: selectedEntries,
-      );
+            query: widget.searchSession.phaseSearchResultsInfo.query,
+            correctedQuery:
+                widget.searchSession.phaseSearchResultsInfo.correctedQuery,
+            selectedEntries: selectedEntries,
+          );
 
       setState(() {
         widget.searchSession.sessionUpdateTime = DateTime.now();
@@ -105,9 +110,9 @@ class _SearchSessionSearchResultsPageState
                   child: Wrap(
                     spacing: 12,
                     runSpacing: 12,
-                    children: widget.searchSession.phaseSearchResultsInfo
-                        .searchResultsMap.keys
-                        .map((searchSource) {
+                    children: widget.searchSession.phaseSearchResultsInfo.searchResultsMap.keys.map((
+                      searchSource,
+                    ) {
                       List<SearchResultEntry> searchResultEntries = widget
                           .searchSession
                           .phaseSearchResultsInfo
@@ -116,36 +121,41 @@ class _SearchSessionSearchResultsPageState
                         width: 400,
                         height: 560,
                         child: Card(
+                          color: Colors.white.withValues(alpha: 0.92),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Search source
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(12, 12, 12, 6),
+                                padding: const EdgeInsets.fromLTRB(
+                                  12,
+                                  12,
+                                  12,
+                                  6,
+                                ),
                                 child: SearchSessionResultPageSourceText(
                                   sourceDisplayText: searchSource.displayText,
                                 ),
                               ),
-                              const Divider(
-                                color: Colors.grey,
-                              ),
+                              const Divider(color: Colors.grey),
                               Expanded(
                                 child: ListView.separated(
                                   itemCount: searchResultEntries.length,
                                   separatorBuilder:
                                       (BuildContext context, int index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 16,
-                                        vertical: 8,
-                                      ),
-                                      child: DashDivider(
-                                        height: 1,
-                                        color: Colors.grey.withOpacity(0.3),
-                                      ),
-                                    );
-                                  },
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 8,
+                                          ),
+                                          child: DashDivider(
+                                            height: 1,
+                                            color: Colors.grey.withValues(
+                                              alpha: 0.3,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                   itemBuilder: (context, index) {
                                     SearchResultEntry searchResultEntry =
                                         searchResultEntries[index];
@@ -160,9 +170,10 @@ class _SearchSessionSearchResultsPageState
                                           Expanded(
                                             child:
                                                 SearchSessionResultPageClickableTitle(
-                                              url: searchResultEntry.url,
-                                              title: searchResultEntry.title,
-                                            ),
+                                                  url: searchResultEntry.url,
+                                                  title:
+                                                      searchResultEntry.title,
+                                                ),
                                           ),
                                           SearchResultEntryCheckbox(
                                             initialValue: false,
@@ -178,17 +189,21 @@ class _SearchSessionSearchResultsPageState
                                             CrossAxisAlignment.start,
                                         children: [
                                           // Search result entry URL + copy URL button
-                                          Row(children: [
-                                            Expanded(
-                                              child:
-                                                  SearchSessionResultPageClickableUrlSubtitle(
-                                                url: searchResultEntry.url,
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child:
+                                                    SearchSessionResultPageClickableUrlSubtitle(
+                                                      url:
+                                                          searchResultEntry.url,
+                                                    ),
                                               ),
-                                            ),
-                                            SearchSessionResultPageCopyButton(
+                                              SearchSessionResultPageCopyButton(
                                                 textToCopy:
-                                                    searchResultEntry.url),
-                                          ]),
+                                                    searchResultEntry.url,
+                                              ),
+                                            ],
+                                          ),
                                           // Search result entry snippet
                                           AmiTextStyle(
                                             // TODO depends on the text language of the session.
@@ -226,10 +241,7 @@ class _SearchSessionSearchResultsPageState
             child: Center(
               child: IconButton(
                 key: keyProceedButton,
-                icon: const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 28,
-                ),
+                icon: const Icon(Icons.keyboard_arrow_right, size: 28),
                 onPressed: () => _confirmSelections(),
               ),
             ), // Your button

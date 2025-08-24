@@ -15,17 +15,11 @@ class SearchSessionResultPageCopyButton extends StatelessWidget {
       onPressed: () async {
         await Clipboard.setData(ClipboardData(text: textToCopy));
       },
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(6),
       // Make the button compact (remove additional paddings)
-      constraints: const BoxConstraints(
-        minWidth: 0,
-        minHeight: 0,
-      ),
+      constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      child: const Icon(
-        Icons.copy,
-        size: 12,
-      ),
+      child: const Icon(Icons.copy, size: 14),
     );
   }
 }

@@ -55,9 +55,7 @@ class SearchSessionResultPageMusicInfoTable extends StatelessWidget {
       // A table. No header.
       // Two columns in each row. The first column is for the entry and the second column is for the value.
       return Table(
-        border: TableBorder.all(
-          color: Colors.grey.withOpacity(0.3),
-        ),
+        border: TableBorder.all(color: Colors.grey.withValues(alpha: 0.3)),
         columnWidths: const <int, TableColumnWidth>{
           0: IntrinsicColumnWidth(),
           1: FlexColumnWidth(),
@@ -70,9 +68,7 @@ class SearchSessionResultPageMusicInfoTable extends StatelessWidget {
                 verticalAlignment: TableCellVerticalAlignment.middle,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: AmiTextStyle(
-                    child: Text(e.key),
-                  ),
+                  child: AmiTextStyle(child: Text(e.key)),
                 ),
               ),
               Row(
@@ -80,12 +76,11 @@ class SearchSessionResultPageMusicInfoTable extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: AmiTextStyle(
-                        child: SelectableText(e.value),
-                      ),
+                      child: AmiTextStyle(child: SelectableText(e.value)),
                     ),
                   ),
                   SearchSessionResultPageCopyButton(textToCopy: e.value),
+                  SizedBox(width: 4),
                 ],
               ),
             ],

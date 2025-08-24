@@ -43,35 +43,47 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
     title: 'Dummy Long Long Long Long Long Long Title',
     artists: [
       'Dummy Long Long Long Long Long Long Long Artist',
-      'Dummy Long Long Long Long Long Long Long Jr. Artist 2'
+      'Dummy Long Long Long Long Long Long Long Jr. Artist 2',
     ],
     album: 'Dummy Long Long Long Long Long Long Long Long Long Long Album',
     date: 'YYYY-MM-DD',
     trackNo: 23,
     composers: [
       'Dummy Long Long Long Long Long Long Long Composer',
-      'Dummy Long Long Long Long Long Long Long Jr. Composer 2'
+      'Dummy Long Long Long Long Long Long Long Jr. Composer 2',
     ],
     lyricists: [
       'Dummy Long Long Long Long Long Long Long Lyricist',
-      'Dummy Long Long Long Long Long Long Long Jr. Lyricist 2'
+      'Dummy Long Long Long Long Long Long Long Jr. Lyricist 2',
     ],
     arrangers: [
       'Dummy Long Long Long Long Long Long Long Arranger',
-      'Dummy Long Long Long Long Long Long Long Jr. Arranger 2'
+      'Dummy Long Long Long Long Long Long Long Jr. Arranger 2',
     ],
     confidence: 'LOW',
     lowConfidenceReason:
         'Long long long long long long long long long dummy reason. Not enough info on this dummy site.',
   );
 
+  final String longDummyThink =
+      'This is a long long long long long long long long long long long long long long long dummy think message.';
+
   MusicInfoWithRequest generateDummyResponse(String url, String query) {
+    if (Random().nextDouble() < 0.3) {
+      throw Exception('Dummy extraction error for URL: $url');
+    }
+
     final MusicInfo musicInfo;
+    final String? think;
     if (query.toLowerCase().contains('long')) {
       musicInfo = longDummyMusicInfo;
+      think = longDummyThink;
     } else {
       final randomIndex = Random().nextInt(dummyMusicInfoList.length);
       musicInfo = dummyMusicInfoList[randomIndex];
+      think = Random().nextDouble() < 0.5
+          ? 'This is a dummy think message.'
+          : null;
     }
 
     final randomSource = MusicInfoSourceEnum
@@ -82,6 +94,7 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
       query: query,
       source: randomSource,
       musicInfo: musicInfo,
+      think: think,
     );
   }
 

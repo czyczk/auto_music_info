@@ -26,7 +26,7 @@ class SearchSessionPageSwitcher extends StatefulWidget {
     if (colorSet == null) {
       return context.theme.colorSchemeExtended.primary;
     } else {
-      return colorSet!.background;
+      return colorSet!.surface;
     }
   }
 
@@ -54,15 +54,16 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: context.appGlobalStyles.sidebarItemHeight,
-        color: widget._determineBackgroundColor(context),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      height: context.appGlobalStyles.sidebarItemHeight,
+      color: widget._determineBackgroundColor(context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           // Back button
           Container(
             padding: EdgeInsets.only(
-                left:
-                    context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges),
+              left: context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges,
+            ),
             child: PageSwitcherButton(
               icon: Icons.arrow_back,
               onPressed: widget.onPreviousPagePressed,
@@ -71,22 +72,24 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
             ),
           ),
           Tooltip(
-              message: 'Active phase: ${widget.searchSession.activePhase}',
-              child: AmiTextStyle(
-                child: Text(
-                  widget.searchSession.phaseKeywordInfo.query == ''
-                      ? 'New Session'
-                      : widget.searchSession.phaseKeywordInfo.query,
-                  style: TextStyle(
-                      fontSize:
-                          context.appGlobalStyles.pageSwitcherMainTitleFontSize,
-                      color: widget._determineForegroundColor(context)),
+            message: 'Active phase: ${widget.searchSession.activePhase}',
+            child: AmiTextStyle(
+              child: Text(
+                widget.searchSession.phaseKeywordInfo.query == ''
+                    ? 'New Session'
+                    : widget.searchSession.phaseKeywordInfo.query,
+                style: TextStyle(
+                  fontSize:
+                      context.appGlobalStyles.pageSwitcherMainTitleFontSize,
+                  color: widget._determineForegroundColor(context),
                 ),
-              )),
+              ),
+            ),
+          ),
           Container(
             padding: EdgeInsets.only(
-                right:
-                    context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges),
+              right: context.appGlobalStyles.pageSwitcherButtonSpacingFromEdges,
+            ),
             child: PageSwitcherButton(
               icon: Icons.arrow_forward,
               onPressed: widget.onNextPagePressed,
@@ -95,6 +98,8 @@ class _SearchSessionPageSwitcherState extends State<SearchSessionPageSwitcher> {
                   context.appGlobalStyles.pageSwitcherButtonIconSize,
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }

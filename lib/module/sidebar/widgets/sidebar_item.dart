@@ -6,13 +6,13 @@ import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:flutter/material.dart';
 
 class SidebarItem extends StatefulWidget {
-  const SidebarItem(
-      {Key? key,
-      required this.sceneInfo,
-      required this.isSelected,
-      required this.onTap,
-      this.colorSet})
-      : super(key: key);
+  const SidebarItem({
+    Key? key,
+    required this.sceneInfo,
+    required this.isSelected,
+    required this.onTap,
+    this.colorSet,
+  }) : super(key: key);
 
   final SceneInfo sceneInfo;
 
@@ -40,11 +40,11 @@ class _SidebarItemState extends State<SidebarItem> {
       }
     } else {
       if (isSelected) {
-        return widget.colorSet!.backgroundActive;
+        return widget.colorSet!.surfaceActive;
       } else if (_isHovered) {
-        return widget.colorSet!.backgroundHover;
+        return widget.colorSet!.surfaceHover;
       } else {
-        return widget.colorSet!.background;
+        return widget.colorSet!.surface;
       }
     }
   }
@@ -72,33 +72,41 @@ class _SidebarItemState extends State<SidebarItem> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-        onEnter: (event) => setState(() => _isHovered = true),
-        onExit: (event) => setState(() => _isHovered = false),
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            curve: Curves.easeOutQuad,
-            constraints: BoxConstraints(
-                minWidth: context.appGlobalStyles.sidebarWidth,
-                minHeight: context.appGlobalStyles.sidebarItemHeight),
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-            color: _determineBackgroundColor(context.theme, widget.isSelected),
-            child: Center(
-                child: ListTile(
-              leading: Icon(
-                widget.sceneInfo.icon,
-                color:
-                    _determineForegroundColor(context.theme, widget.isSelected),
+      onEnter: (event) => setState(() => _isHovered = true),
+      onExit: (event) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeOutQuad,
+        constraints: BoxConstraints(
+          minWidth: context.appGlobalStyles.sidebarWidth,
+          minHeight: context.appGlobalStyles.sidebarItemHeight,
+        ),
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        color: _determineBackgroundColor(context.theme, widget.isSelected),
+        child: Center(
+          child: ListTile(
+            leading: Icon(
+              widget.sceneInfo.icon,
+              color: _determineForegroundColor(
+                context.theme,
+                widget.isSelected,
               ),
-              title: AmiTextStyle(
-                child: Text(
-                  widget.sceneInfo.name,
-                  style: TextStyle(
-                    color: _determineForegroundColor(
-                        context.theme, widget.isSelected),
+            ),
+            title: AmiTextStyle(
+              child: Text(
+                widget.sceneInfo.name,
+                style: TextStyle(
+                  color: _determineForegroundColor(
+                    context.theme,
+                    widget.isSelected,
                   ),
                 ),
               ),
-              onTap: () => widget.onTap(widget.sceneInfo),
-            ))));
+            ),
+            onTap: () => widget.onTap(widget.sceneInfo),
+          ),
+        ),
+      ),
+    );
   }
 }

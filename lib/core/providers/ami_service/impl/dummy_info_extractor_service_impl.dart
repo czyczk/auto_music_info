@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_music_info/core/providers/ami_service/info_extractor_service.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/music_info.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/music_info_request.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/music_info_source_enum.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/music_info_with_request.dart';
 
@@ -90,8 +91,7 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
         .values[Random().nextInt(MusicInfoSourceEnum.values.length)];
 
     return MusicInfoWithRequest(
-      url: url,
-      query: query,
+      request: MusicInfoRequest(url: url, query: query),
       source: randomSource,
       musicInfo: musicInfo,
       think: think,

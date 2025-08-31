@@ -16,31 +16,29 @@ class InfoExtractorServiceImpl extends InfoExtractorService {
   @override
   Future<MusicInfoWithRequest> extractInfo(String url, String query) async {
     final resp = await _httpClient.post(
-      Uri.parse('${appConfig.serverEndpoint}/api/v1/info-extractor/'),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'url': url,
-        'query': query,
-      }),
+      Uri.parse('${appConfig.serverEndpoint}/api/v1/info-extractor'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'url': url, 'query': query}),
     );
     final respBody = utf8.decode(resp.bodyBytes);
 
     if (resp.statusCode != 200) {
       throw Exception(
-          'Failed to get result from info extractor; url: $url; query: $query; statusCode: ${resp.statusCode}; body: ${respBody.isEmpty ? '<empty>' : respBody}');
+        'Failed to get result from info extractor; url: $url; query: $query; statusCode: ${resp.statusCode}; body: ${respBody.isEmpty ? '<empty>' : respBody}',
+      );
     }
 
     final respJson = jsonDecode(respBody);
     final respDto = ServerMessageDto.fromJson(respJson);
     if (respDto.error != null) {
       throw Exception(
-          'Failed to get result from info extractor because of server error; url: $url; query: $query; errorCode: ${respDto.error!.errorCode}; errorMessage: ${respDto.error!.message}');
+        'Failed to get result from info extractor because of server error; url: $url; query: $query; errorCode: ${respDto.error!.errorCode}; errorMessage: ${respDto.error!.message}',
+      );
     }
 
-    final musicInfoWithRequestDto =
-        MusicInfoWithRequestDto.fromJson(respDto.data);
+    final musicInfoWithRequestDto = MusicInfoWithRequestDto.fromJson(
+      respDto.data,
+    );
     return MusicInfoWithRequest.fromDto(musicInfoWithRequestDto);
   }
 }

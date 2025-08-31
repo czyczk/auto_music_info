@@ -14,7 +14,4 @@ ServerMessageDto _$ServerMessageDtoFromJson(Map<String, dynamic> json) =>
           : ServerExceptionDto.fromJson(json['error'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$ServerMessageDtoToJson(ServerMessageDto instance) =>
-    <String, dynamic>{
-      'data': instance.data,
-      'error': instance.error,
-    };
+    <String, dynamic>{'data': instance.data, 'error': instance.error};

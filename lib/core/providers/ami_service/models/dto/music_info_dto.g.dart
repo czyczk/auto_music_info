@@ -11,6 +11,7 @@ MusicInfoDto _$MusicInfoDtoFromJson(Map<String, dynamic> json) => MusicInfoDto(
   title: json['title'] as String,
   album: json['album'] as String?,
   date: json['date'] as String?,
+  genres: (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
   trackNo: (json['trackNo'] as num?)?.toInt(),
   composers: (json['composers'] as List<dynamic>?)
       ?.map((e) => e as String)
@@ -31,6 +32,7 @@ Map<String, dynamic> _$MusicInfoDtoToJson(MusicInfoDto instance) =>
       'title': instance.title,
       'album': instance.album,
       'date': instance.date,
+      'genres': instance.genres,
       'trackNo': instance.trackNo,
       'composers': instance.composers,
       'lyricists': instance.lyricists,

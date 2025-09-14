@@ -8,6 +8,7 @@ class MusicInfoDto {
   final String title;
   final String? album;
   final String? date;
+  final List<String>? genres;
   final int? trackNo;
   final List<String>? composers;
   final List<String>? lyricists;
@@ -20,6 +21,7 @@ class MusicInfoDto {
     required this.title,
     this.album,
     this.date,
+    this.genres,
     this.trackNo,
     this.composers,
     this.lyricists,

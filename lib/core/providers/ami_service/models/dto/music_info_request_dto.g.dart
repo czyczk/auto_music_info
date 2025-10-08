@@ -9,6 +9,7 @@ part of 'music_info_request_dto.dart';
 MusicInfoRequestDto _$MusicInfoRequestDtoFromJson(Map<String, dynamic> json) =>
     MusicInfoRequestDto(
       query: json['query'] as String,
+      timeout: (json['timeout'] as num?)?.toInt(),
       url: json['url'] as String?,
       structuredDoc: json['structuredDoc'] as String?,
     );
@@ -19,4 +20,5 @@ Map<String, dynamic> _$MusicInfoRequestDtoToJson(
   'url': instance.url,
   'structuredDoc': instance.structuredDoc,
   'query': instance.query,
+  'timeout': instance.timeout,
 };

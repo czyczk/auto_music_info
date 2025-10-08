@@ -7,8 +7,14 @@ class MusicInfoRequestDto {
   final String? url;
   final String? structuredDoc;
   final String query;
+  final int? timeout;
 
-  MusicInfoRequestDto({required this.query, this.url, this.structuredDoc});
+  MusicInfoRequestDto({
+    required this.query,
+    this.timeout,
+    this.url,
+    this.structuredDoc,
+  });
 
   factory MusicInfoRequestDto.fromJson(Map<String, dynamic> json) =>
       _$MusicInfoRequestDtoFromJson(json);

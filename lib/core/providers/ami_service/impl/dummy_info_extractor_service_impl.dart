@@ -92,9 +92,14 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
 
     return MusicInfoWithRequest(
       request: MusicInfoRequest(url: url, query: query),
+      convertedRequest: MusicInfoRequest(
+        structuredDoc: 'Dummy converted structured doc.',
+        query: query,
+      ),
       source: randomSource,
       musicInfo: musicInfo,
       think: think,
+      tools: ['DummyTool1', 'DummyTool2'],
     );
   }
 

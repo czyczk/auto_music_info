@@ -1,4 +1,5 @@
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
+import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
 import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
 import 'package:auto_music_info/module/common/widgets/dash_divider.dart';
 import 'package:auto_music_info/module/search_session_carousel/models/search_session_model.dart';
@@ -37,6 +38,22 @@ class _SearchSessionSearchResultsPageState
   void dispose() {
     keyboardListenerFocusNode.dispose();
     super.dispose();
+  }
+
+  bool _isSearchResultsEmpty(
+    Map<SearchSourceEnum, List<SearchResultEntry>> searchResultsMap,
+  ) {
+    if (searchResultsMap.isEmpty) {
+      return true;
+    }
+
+    for (var entry in searchResultsMap.entries) {
+      if (entry.value.isNotEmpty) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   Future<void> _confirmSelections() async {
@@ -98,6 +115,21 @@ class _SearchSessionSearchResultsPageState
 
   @override
   Widget build(BuildContext context) {
+    if (_isSearchResultsEmpty(
+      widget.searchSession.phaseSearchResultsInfo.searchResultsMap,
+    )) {
+      return const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.question_mark, size: 48, color: Colors.grey),
+            SizedBox(width: 32),
+            Text('Empty search results.'),
+          ],
+        ),
+      );
+    }
+
     return Stack(
       children: [
         SingleChildScrollView(

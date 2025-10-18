@@ -62,20 +62,51 @@ class SearchSessionMusicInfoResultsPage extends StatefulWidget {
     return Icon(iconData, size: size, color: color);
   }
 
-  String _determineSourceTooltipDescription(
+  TextSpan _determineSourceTooltipDescription(
     WrappedData<MusicInfoWithRequest> musicInfo,
   ) {
     if (!musicInfo.hasData) {
-      return 'Error';
+      return TextSpan(text: 'Error');
+    }
+
+    // Minimum display text.
+    var result = TextSpan(
+      text: '',
+      children: [
+        TextSpan(
+          text: musicInfo.data!.source.displayText,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+
+    if (musicInfo.data!.tools.isNotEmpty) {
+      // + optional tools.
+      result.children!.addAll([
+        TextSpan(text: '\n\n'),
+        TextSpan(
+          text: 'Tools: ',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        // Expand `tools`. Each line is prepended with a bullet ●.
+        TextSpan(text: musicInfo.data!.tools.map((tool) => '\n● $tool').join()),
+      ]);
     }
 
     if (musicInfo.data!.source == MusicInfoSourceEnum.ai &&
         musicInfo.data!.think != null) {
-      // Display text + optional ToC.
-      return '${musicInfo.data!.source.displayText}\n\nToC: ${musicInfo.data!.think!}';
+      // + optional ToC.
+      result.children!.addAll([
+        TextSpan(text: '\n\n'),
+        TextSpan(
+          text: 'ToC: ',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        TextSpan(text: musicInfo.data!.think!),
+      ]);
     }
 
-    return musicInfo.data!.source.displayText;
+    return result;
   }
 }
 
@@ -369,7 +400,7 @@ class _SearchSessionMusicInfoResultsPageState
                                               height: 24,
                                               child: Tooltip(
                                                 preferBelow: false,
-                                                message: widget
+                                                richMessage: widget
                                                     ._determineSourceTooltipDescription(
                                                       musicInfo,
                                                     ),

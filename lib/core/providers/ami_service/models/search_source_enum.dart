@@ -1,8 +1,7 @@
 enum SearchSourceEnum {
-  wikipedia('Wikipedia', 'WIKIPEDIA'),
+  wikiLike('Wiki-Like', 'WIKI_LIKE'),
   musicPlatforms('Music Platforms', 'MUSIC_PLATFORM'),
-  other('Other', 'ENTIRE'),
-  ;
+  other('Other', 'ENTIRE');
 
   final String displayText;
 

@@ -18,7 +18,7 @@ class InfoExtractorServiceImpl extends InfoExtractorService {
     final resp = await _httpClient.post(
       Uri.parse('${appConfig.serverEndpoint}/api/v1/info-extractor'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'url': url, 'query': query}),
+      body: jsonEncode({'url': url, 'query': query, 'timeout': 60000}),
     );
     final respBody = utf8.decode(resp.bodyBytes);
 

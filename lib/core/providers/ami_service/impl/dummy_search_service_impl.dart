@@ -5,8 +5,8 @@ import 'package:auto_music_info/core/providers/ami_service/search_service.dart';
 
 class DummySearchServiceImpl extends SearchService {
   final Map<SearchSourceEnum, List<SearchResultEntry>>
-      _normalRealisticSearchResultMap = {
-    SearchSourceEnum.wikipedia: [
+  _normalRealisticSearchResultMap = {
+    SearchSourceEnum.wikiLike: [
       SearchResultEntry(
         title: 'The Best Damn Thing',
         url: 'https://en.wikipedia.org/wiki/The_Best_Damn_Thing',
@@ -133,12 +133,12 @@ class DummySearchServiceImpl extends SearchService {
         snippet: 'Kizuna AI - future base (Prod.Yunomi) - YouTube',
         site: 'www.youtube.com',
       ),
-    ]
+    ],
   };
 
-  final Map<SearchSourceEnum, List<SearchResultEntry>> longTextSearchResultMap =
-      {
-    SearchSourceEnum.wikipedia: [
+  final Map<SearchSourceEnum, List<SearchResultEntry>>
+  longTextSearchResultMap = {
+    SearchSourceEnum.wikiLike: [
       SearchResultEntry(
         title:
             '111 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
@@ -233,7 +233,7 @@ class DummySearchServiceImpl extends SearchService {
   };
 
   final Map<SearchSourceEnum, List<SearchResultEntry>> jaSearchResultMap = {
-    SearchSourceEnum.wikipedia: [
+    SearchSourceEnum.wikiLike: [
       SearchResultEntry(
         title: 'Vivy -Fluorite Eye\'s Song',
         url: 'https://ja.wikipedia.org/wiki/Vivy_-Fluorite_Eye%27s_Song-',
@@ -262,7 +262,7 @@ class DummySearchServiceImpl extends SearchService {
   };
 
   final Map<SearchSourceEnum, List<SearchResultEntry>> zhHansSearchResultMap = {
-    SearchSourceEnum.wikipedia: [
+    SearchSourceEnum.wikiLike: [
       SearchResultEntry(
         title: '七里香_百度百科',
         url:
@@ -284,7 +284,7 @@ class DummySearchServiceImpl extends SearchService {
   };
 
   final Map<SearchSourceEnum, List<SearchResultEntry>> zhHantSearchResultMap = {
-    SearchSourceEnum.wikipedia: [
+    SearchSourceEnum.wikiLike: [
       SearchResultEntry(
         title: '七里香(專輯) - 維基百科，自由的百科全書',
         url:

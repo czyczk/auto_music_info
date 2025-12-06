@@ -40,36 +40,29 @@ class SearchSessionPhaseKeywordInfo {
 class SearchSessionPhaseSearchResultsInfo {
   SearchSessionPhaseSearchResultsInfo.ofEmpty() {
     query = "";
-    correctedQuery = null;
     isCompleted = false;
     searchResultsMap = {};
   }
 
-  SearchSessionPhaseSearchResultsInfo.ofPending({
-    required this.query,
-    this.correctedQuery,
-  }) {
+  SearchSessionPhaseSearchResultsInfo.ofPending({required this.query}) {
     isCompleted = false;
     searchResultsMap = {};
   }
 
   SearchSessionPhaseSearchResultsInfo.ofResults({
     required this.query,
-    this.correctedQuery,
     required this.searchResultsMap,
   }) {
     isCompleted = true;
   }
 
   late final String query;
-  String? correctedQuery;
   late bool isCompleted;
   late Map<SearchSourceEnum, List<SearchResultEntry>> searchResultsMap;
 }
 
 class SearchSessionPhaseMusicInfoResultsInfo {
   late final String query;
-  String? correctedQuery;
   late final Map<SearchSourceEnum, List<SearchResultEntry>> selectedEntries;
   late bool isCompleted;
   late int totalCount;
@@ -80,7 +73,6 @@ class SearchSessionPhaseMusicInfoResultsInfo {
 
   SearchSessionPhaseMusicInfoResultsInfo.ofEmpty() {
     query = "";
-    correctedQuery = null;
     selectedEntries = {};
     isCompleted = false;
     totalCount = 0;
@@ -91,7 +83,6 @@ class SearchSessionPhaseMusicInfoResultsInfo {
 
   SearchSessionPhaseMusicInfoResultsInfo.ofPending({
     required this.query,
-    this.correctedQuery,
     required this.selectedEntries,
   }) {
     isCompleted = false;

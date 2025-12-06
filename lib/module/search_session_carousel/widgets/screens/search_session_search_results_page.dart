@@ -1,3 +1,4 @@
+import 'package:auto_music_info/core/config/color_scheme/app_theme.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_result_entry.dart';
 import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
 import 'package:auto_music_info/module/common/widgets/ami_text_style.dart';
@@ -90,8 +91,6 @@ class _SearchSessionSearchResultsPageState
       widget.searchSession.phaseMusicInfoResultsInfo =
           SearchSessionPhaseMusicInfoResultsInfo.ofPending(
             query: widget.searchSession.phaseSearchResultsInfo.query,
-            correctedQuery:
-                widget.searchSession.phaseSearchResultsInfo.correctedQuery,
             selectedEntries: selectedEntries,
           );
 
@@ -110,6 +109,17 @@ class _SearchSessionSearchResultsPageState
       setState(() {
         isDebouncing = false;
       });
+    }
+  }
+
+  String _formatProvider(String enumString) {
+    switch (enumString) {
+      case 'DUCK_DUCK_GO':
+        return 'Duck Duck Go';
+      case 'GOOGLE':
+        return 'Google';
+      default:
+        return enumString;
     }
   }
 
@@ -236,6 +246,23 @@ class _SearchSessionSearchResultsPageState
                                               ),
                                             ],
                                           ),
+                                          // Search provider
+                                          Row(
+                                            children: [
+                                              AmiTextStyle(
+                                                child: Text(
+                                                  "Provider: ${_formatProvider(searchResultEntry.serviceProvider)}",
+                                                  style: TextStyle(
+                                                    color: context
+                                                        .theme
+                                                        .colorSchemeExtended
+                                                        .secondaryHover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 8),
                                           // Search result entry snippet
                                           AmiTextStyle(
                                             // TODO depends on the text language of the session.

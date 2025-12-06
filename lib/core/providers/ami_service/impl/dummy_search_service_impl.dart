@@ -8,6 +8,7 @@ class DummySearchServiceImpl extends SearchService {
   _normalRealisticSearchResultMap = {
     SearchSourceEnum.wikiLike: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'The Best Damn Thing',
         url: 'https://en.wikipedia.org/wiki/The_Best_Damn_Thing',
         snippet:
@@ -15,6 +16,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'en.wikipedia.org',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Vivy -Fluorite Eye\'s Song',
         url: 'https://ja.wikipedia.org/wiki/Vivy_-Fluorite_Eye%27s_Song-',
         snippet:
@@ -22,6 +24,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'ja.wikipedia.org',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Ignorantes',
         url: 'https://en.wikipedia.org/wiki/Ignorantes',
         snippet:
@@ -29,6 +32,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'en.wikipedia.org',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'South of the Border (Ed Sheeran song)',
         url:
             'https://en.wikipedia.org/wiki/South_of_the_Border_(Ed_Sheeran_song)',
@@ -39,6 +43,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
     SearchSourceEnum.musicPlatforms: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'The Best Damn Thing (Expanded Edition) - Album by Avril ...',
         url: 'https://open.spotify.com/album/6lqE05fiHWJVYYdMVJNj38',
         snippet:
@@ -46,6 +51,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'open.spotify.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Sing My Pleasure - song and lyrics by ヴィヴィ(Vo.八木海莉)',
         url: 'https://open.spotify.com/track/6wOazYrDGLhMAhwU6RArlg',
         snippet:
@@ -53,6 +59,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'open.spotify.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '八木海莉/Sing My Pleasure - CDシングル',
         url: 'https://tower.jp/item/5178072/Sing-My-Pleasure',
         snippet:
@@ -60,6 +67,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'tower.jp',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Ignorantes - Single by Bad Bunny',
         url: 'https://open.spotify.com/album/7Hw9RJbQPN0gUx4xjgFLhj',
         snippet:
@@ -67,6 +75,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'open.spotify.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Ignorantes',
         url: 'https://y.qq.com/n/ryqq/mv/t0033urc6qt',
         snippet:
@@ -74,6 +83,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'y.qq.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Annabel/夜の国＜通常盤＞',
         url:
             'https://tower.jp/item/3906528/%E5%A4%9C%E3%81%AE%E5%9B%BD%EF%BC%9C%E9%80%9A%E5%B8%B8%E7%9B%A4%EF%BC%9E',
@@ -82,6 +92,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'tower.jp',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'South of the Border (feat. Camila Cabello & Cardi B)',
         url: 'https://open.spotify.com/track/4vUmTMuQqjdnvlZmAH61Qk',
         snippet:
@@ -89,6 +100,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'open.spotify.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'future base - Single by Kizuna AI',
         url: 'https://open.spotify.com/album/4EXNitbM0G8ligJXUodkGE',
         snippet:
@@ -98,6 +110,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
     SearchSourceEnum.other: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Sing My Pleasure | Vivy: Fluorite Eye\'s Song Wiki | Fandom',
         url: 'https://vivy-fluorite-eyes-song.fandom.com/wiki/Sing_My_Pleasure',
         snippet:
@@ -105,6 +118,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'vivy-fluorite-eyes-song.fandom.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '夜の国 歌詞 Annabel GANGSTA. ED ふりがな付',
         url: 'https://utaten.com/lyric/ya15082611/',
         snippet:
@@ -112,6 +126,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'utaten.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             'Maître Gims & Alvaro Soler - Paroles de "Lo Mismo" | Lyrics ...',
         url: 'https://www.azlyrics.com/lyrics/matregims/lomismo.html',
@@ -120,6 +135,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'azlyrics.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             'South of the Border (feat. Camila Cabello & Cardi B ... - YouTube',
         url: 'https://www.youtube.com/watch?v=UPOT2tgY9QQ',
@@ -128,6 +144,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'www.youtube.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Kizuna AI - future base (Prod.Yunomi) - YouTube',
         url: 'https://www.youtube.com/watch?v=yeD7eAuza74',
         snippet: 'Kizuna AI - future base (Prod.Yunomi) - YouTube',
@@ -140,6 +157,7 @@ class DummySearchServiceImpl extends SearchService {
   longTextSearchResultMap = {
     SearchSourceEnum.wikiLike: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '111 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -149,6 +167,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '222 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -158,6 +177,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '333 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -167,6 +187,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '444 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -176,6 +197,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '555 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -185,6 +207,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '666 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -194,6 +217,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '777 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -203,6 +227,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '888 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -212,6 +237,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             '999 Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -221,6 +247,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'longlong.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title:
             'aaa Long long longlong long long longlong long long longlong long long longlong long long longlong title',
         url:
@@ -235,6 +262,7 @@ class DummySearchServiceImpl extends SearchService {
   final Map<SearchSourceEnum, List<SearchResultEntry>> jaSearchResultMap = {
     SearchSourceEnum.wikiLike: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Vivy -Fluorite Eye\'s Song',
         url: 'https://ja.wikipedia.org/wiki/Vivy_-Fluorite_Eye%27s_Song-',
         snippet:
@@ -244,6 +272,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
     SearchSourceEnum.musicPlatforms: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: 'Sing My Pleasure - song and lyrics by ヴィヴィ(Vo.八木海莉)',
         url: 'https://open.spotify.com/track/6wOazYrDGLhMAhwU6RArlg',
         snippet:
@@ -251,6 +280,7 @@ class DummySearchServiceImpl extends SearchService {
         site: 'open.spotify.com',
       ),
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '八木海莉/Sing My Pleasure - CDシングル',
         url: 'https://tower.jp/item/5178072/Sing-My-Pleasure',
         snippet:
@@ -264,6 +294,7 @@ class DummySearchServiceImpl extends SearchService {
   final Map<SearchSourceEnum, List<SearchResultEntry>> zhHansSearchResultMap = {
     SearchSourceEnum.wikiLike: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '七里香_百度百科',
         url:
             'https://baike.baidu.com/item/%E4%B8%83%E9%87%8C%E9%A6%99/12009481',
@@ -274,6 +305,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
     SearchSourceEnum.musicPlatforms: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '七里香',
         url: 'https://y.qq.com/n/ryqq/songDetail/004Z8Ihr0JIu5s',
         snippet:
@@ -286,6 +318,7 @@ class DummySearchServiceImpl extends SearchService {
   final Map<SearchSourceEnum, List<SearchResultEntry>> zhHantSearchResultMap = {
     SearchSourceEnum.wikiLike: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '七里香(專輯) - 維基百科，自由的百科全書',
         url:
             'https://zh.wikipedia.org/wiki/%E4%B8%83%E9%87%8C%E9%A6%99_(%E5%B0%88%E8%BC%AF)',
@@ -295,6 +328,7 @@ class DummySearchServiceImpl extends SearchService {
     ],
     SearchSourceEnum.musicPlatforms: [
       SearchResultEntry(
+        serviceProvider: 'Dummy',
         title: '七里香-歌詞-周杰倫(Jay Chou)',
         url: 'https://www.kkbox.com/hk/tc/song/SkZOLqKGFd6eC_yZeU',
         snippet:
@@ -308,32 +342,15 @@ class DummySearchServiceImpl extends SearchService {
   Future<SearchResults> searchWithKeyword(String keyword) async {
     await Future.delayed(const Duration(milliseconds: 200));
     if (keyword.contains('long')) {
-      return SearchResults(
-        serviceProvider: 'Google',
-        query: keyword,
-        resultMap: longTextSearchResultMap,
-      );
+      return SearchResults(query: keyword, resultMap: longTextSearchResultMap);
     } else if (keyword.contains("ja")) {
-      return SearchResults(
-        serviceProvider: 'Google',
-        query: keyword,
-        resultMap: jaSearchResultMap,
-      );
+      return SearchResults(query: keyword, resultMap: jaSearchResultMap);
     } else if (keyword.contains("zhHans")) {
-      return SearchResults(
-        serviceProvider: 'Google',
-        query: keyword,
-        resultMap: zhHansSearchResultMap,
-      );
+      return SearchResults(query: keyword, resultMap: zhHansSearchResultMap);
     } else if (keyword.contains("zhHant")) {
-      return SearchResults(
-        serviceProvider: 'Google',
-        query: keyword,
-        resultMap: zhHantSearchResultMap,
-      );
+      return SearchResults(query: keyword, resultMap: zhHantSearchResultMap);
     } else {
       return SearchResults(
-        serviceProvider: 'Google',
         query: keyword,
         resultMap: _normalRealisticSearchResultMap,
       );

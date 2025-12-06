@@ -1,11 +1,18 @@
 import 'package:auto_music_info/core/providers/ami_service/models/dto/search_result_entry_dto.dart';
 
 class SearchResultEntry {
-  SearchResultEntry(
-      {required this.title,
-      required this.url,
-      required this.snippet,
-      required this.site});
+  SearchResultEntry({
+    required this.serviceProvider,
+    this.correctedQuery,
+    required this.title,
+    required this.url,
+    required this.snippet,
+    required this.site,
+  });
+
+  final String serviceProvider;
+
+  final String? correctedQuery;
 
   final String title;
 
@@ -20,6 +27,8 @@ class SearchResultEntry {
 
   factory SearchResultEntry.fromDto(SearchResultEntryDto dto) {
     return SearchResultEntry(
+      serviceProvider: dto.provider,
+      correctedQuery: dto.correctedQuery,
       title: dto.title,
       url: dto.url,
       snippet: dto.snippet,

@@ -114,7 +114,6 @@ class _SearchSessionKeywordPage extends State<SearchSessionKeywordPage> {
         widget.searchSession.phaseSearchResultsInfo =
             SearchSessionPhaseSearchResultsInfo.ofResults(
               query: searchResults.query,
-              correctedQuery: searchResults.correctedQuery,
               searchResultsMap: searchResults.resultMap,
             );
       });

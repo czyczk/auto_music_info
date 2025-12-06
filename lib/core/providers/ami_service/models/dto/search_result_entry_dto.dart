@@ -4,6 +4,10 @@ part 'search_result_entry_dto.g.dart';
 
 @JsonSerializable()
 class SearchResultEntryDto {
+  late final String provider;
+
+  late final String? correctedQuery;
+
   late final String title;
 
   late final String url;

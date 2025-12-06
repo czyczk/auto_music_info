@@ -13,6 +13,7 @@ import 'package:auto_music_info/module/search_session_carousel/widgets/component
 import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_session_result_page_copy_button.dart';
 import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_session_result_page_music_info_table.dart';
 import 'package:auto_music_info/module/search_session_carousel/widgets/components/search_session_result_page_source_text.dart';
+import 'package:auto_music_info/module/search_session_carousel/widgets/screens/html_preview_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -159,10 +160,11 @@ class _SearchSessionMusicInfoResultsPageState
         if (isDebouncing) {
           return;
         }
-        isDebouncing = true;
 
         try {
           setState(() {
+            isDebouncing = true;
+
             // Mark the result info as not completed and failure count -1.
             widget.searchSession.phaseMusicInfoResultsInfo.revokeFailureCount();
 
@@ -189,6 +191,43 @@ class _SearchSessionMusicInfoResultsPageState
       constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       child: const Icon(Icons.refresh, size: 16),
+    );
+  }
+
+  Widget _optionalDebugButton(
+    BuildContext context,
+    WrappedData<MusicInfoWithRequest> musicInfo,
+  ) {
+    if (!musicInfo.hasData ||
+        (musicInfo.data!.convertedRequest?.structuredDoc == null &&
+            musicInfo.data!.request.structuredDoc == null)) {
+      return const SizedBox.shrink();
+    }
+
+    // It's checked if it enters here.
+    var htmlDoc =
+        musicInfo.data!.convertedRequest?.structuredDoc! ??
+        musicInfo.data!.request.structuredDoc!;
+
+    return Tooltip(
+      preferBelow: false,
+      message: 'Click to view extracted page',
+      child: RawMaterialButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return HtmlPreviewPage(htmlDoc: htmlDoc);
+              },
+            ),
+          );
+        },
+        padding: const EdgeInsets.all(6),
+        // Make the button compact (remove additional paddings)
+        constraints: const BoxConstraints(minWidth: 0, minHeight: 0),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        child: const Icon(Icons.bug_report_outlined, size: 16),
+      ),
     );
   }
 
@@ -376,7 +415,7 @@ class _SearchSessionMusicInfoResultsPageState
                                           .selectedEntries[searchSource]![index];
                                       final musicInfo = musicInfoList[index]!;
                                       return ListTile(
-                                        // Search result entry title + info source icon
+                                        // Search result entry title + debug icon + info source icon
                                         title: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -394,6 +433,10 @@ class _SearchSessionMusicInfoResultsPageState
                                             _optionalRetryButton(
                                               musicInfo,
                                               infoExtractorService,
+                                            ),
+                                            _optionalDebugButton(
+                                              context,
+                                              musicInfo,
                                             ),
                                             SizedBox(
                                               width: 24,

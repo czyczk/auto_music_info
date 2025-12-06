@@ -93,7 +93,8 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
     return MusicInfoWithRequest(
       request: MusicInfoRequest(url: url, query: query),
       convertedRequest: MusicInfoRequest(
-        structuredDoc: 'Dummy converted structured doc.',
+        structuredDoc:
+            '<html lang="zh-Hant"><h1>Dummy converted structured doc.</h1><h2>H2 title</h2><p>骨</p></html>',
         query: query,
       ),
       source: randomSource,

@@ -3,26 +3,19 @@ import 'package:auto_music_info/core/providers/ami_service/models/search_result_
 import 'package:auto_music_info/core/providers/ami_service/models/search_source_enum.dart';
 
 class SearchResults {
-  SearchResults(
-      {required this.serviceProvider,
-      required this.query,
-      this.correctedQuery,
-      required this.resultMap});
+  SearchResults({required this.query, required this.resultMap});
 
-  final String serviceProvider;
   final String query;
-  final String? correctedQuery;
   final Map<SearchSourceEnum, List<SearchResultEntry>> resultMap;
 
   factory SearchResults.fromIntegratedDto(
-      Map<String, SearchResultDto> integratedDto) {
+    Map<String, SearchResultDto> integratedDto,
+  ) {
     if (integratedDto.isEmpty) {
       throw Exception('map is empty');
     }
 
-    final searchProvider = integratedDto.entries.first.value.provider;
     final query = integratedDto.entries.first.value.query;
-    final correctedQuery = integratedDto.entries.first.value.correctedQuery;
 
     final resultMap = <SearchSourceEnum, List<SearchResultEntry>>{};
     for (final sourceEntry in integratedDto.entries) {
@@ -37,11 +30,6 @@ class SearchResults {
       }
     }
 
-    return SearchResults(
-      serviceProvider: searchProvider,
-      query: query,
-      correctedQuery: correctedQuery,
-      resultMap: resultMap,
-    );
+    return SearchResults(query: query, resultMap: resultMap);
   }
 }

@@ -16,7 +16,9 @@ class SearchServiceImpl extends SearchService {
   @override
   Future<SearchResults> searchWithKeyword(String keyword) async {
     final resp = await _httpClient.post(
-      Uri.parse('${appConfig.serverEndpoint}/api/v1/search/google/integrated'),
+      Uri.parse(
+        '${appConfig.serverEndpoint}/api/v1/search/all-in-one/integrated',
+      ),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'query': keyword}),
     );

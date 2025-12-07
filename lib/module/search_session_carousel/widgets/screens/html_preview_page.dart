@@ -34,7 +34,7 @@ class _HtmlPreviewPageState extends State<HtmlPreviewPage> {
                     icon: const Icon(Icons.arrow_back),
                     onPressed: () => Navigator.of(context).pop(),
                   ),
-                  Expanded(
+                  SingleChildScrollView(
                     child: Center(
                       child: Text(
                         'HTML Preview',

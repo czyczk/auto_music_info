@@ -11,9 +11,11 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
     MusicInfo(
       artists: ['Dummy Artist', 'Dummy Jr. Artist 2'],
       title: 'Dummy Title',
+      pageType: 'TRACK',
       album: 'Dummy Album',
       date: 'YYYY-MM-DD',
       trackNo: 23,
+      discNo: 2,
       composers: ['Dummy Composer', 'Dummy Jr. Composer 2'],
       lyricists: ['Dummy Lyricist', 'Dummy Jr. Lyricist 2'],
       arrangers: ['Dummy Arranger', 'Dummy Jr. Arranger 2'],
@@ -23,6 +25,7 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
     MusicInfo(
       artists: ['Dummy Artist', 'Dummy Jr. Artist 2'],
       title: 'Dummy Title',
+      pageType: 'ALBUM',
       date: 'YYYY-MM-DD',
       trackNo: 23,
       composers: ['Dummy Composer', 'Dummy Jr. Composer 2'],
@@ -31,6 +34,7 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
     MusicInfo(
       artists: ['Dummy Artist', 'Dummy Jr. Artist 2'],
       title: 'Dummy Title',
+      pageType: 'ARTIST',
       date: 'YYYY-MM-DD',
       trackNo: 23,
       composers: ['Dummy Composer', 'Dummy Jr. Composer 2'],
@@ -46,9 +50,11 @@ class DummyInfoExtractorServiceImpl extends InfoExtractorService {
       'Dummy Long Long Long Long Long Long Long Artist',
       'Dummy Long Long Long Long Long Long Long Jr. Artist 2',
     ],
+    pageType: 'OTHER',
     album: 'Dummy Long Long Long Long Long Long Long Long Long Long Album',
     date: 'YYYY-MM-DD',
     trackNo: 23,
+    discNo: 2,
     composers: [
       'Dummy Long Long Long Long Long Long Long Composer',
       'Dummy Long Long Long Long Long Long Long Jr. Composer 2',

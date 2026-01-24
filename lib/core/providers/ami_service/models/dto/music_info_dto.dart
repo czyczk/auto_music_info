@@ -6,10 +6,14 @@ part 'music_info_dto.g.dart';
 class MusicInfoDto {
   final List<String> artists;
   final String title;
+  final String pageType;
   final String? album;
   final String? date;
   final List<String>? genres;
   final int? trackNo;
+  final int? totalTracks;
+  final int? discNo;
+  final int? totalDiscs;
   final List<String>? composers;
   final List<String>? lyricists;
   final List<String>? arrangers;
@@ -19,10 +23,14 @@ class MusicInfoDto {
   MusicInfoDto({
     required this.artists,
     required this.title,
+    required this.pageType,
     this.album,
     this.date,
     this.genres,
     this.trackNo,
+    this.totalTracks,
+    this.discNo,
+    this.totalDiscs,
     this.composers,
     this.lyricists,
     this.arrangers,

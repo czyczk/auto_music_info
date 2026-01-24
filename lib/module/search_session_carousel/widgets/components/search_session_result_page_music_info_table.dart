@@ -17,14 +17,29 @@ class SearchSessionResultPageMusicInfoTable extends StatelessWidget {
     final List<MapEntry<String, String>> viewModels = [];
     viewModels.add(MapEntry('Title', musicInfo.title));
     viewModels.add(MapEntry('Artists', musicInfo.artists.join(', ')));
+    viewModels.add(MapEntry('Page Type', musicInfo.pageType));
     if (musicInfo.album != null) {
       viewModels.add(MapEntry('Album', musicInfo.album!));
     }
     if (musicInfo.date != null) {
       viewModels.add(MapEntry('Date', musicInfo.date!));
     }
+    if (musicInfo.genres != null && musicInfo.genres!.isNotEmpty) {
+      viewModels.add(MapEntry('Genres', musicInfo.genres!.join(', ')));
+    }
     if (musicInfo.trackNo != null) {
       viewModels.add(MapEntry('Track No.', musicInfo.trackNo!.toString()));
+    }
+    if (musicInfo.totalTracks != null) {
+      viewModels.add(
+        MapEntry('Total Tracks', musicInfo.totalTracks!.toString()),
+      );
+    }
+    if (musicInfo.discNo != null) {
+      viewModels.add(MapEntry('Disc No.', musicInfo.discNo!.toString()));
+    }
+    if (musicInfo.totalDiscs != null) {
+      viewModels.add(MapEntry('Total Discs', musicInfo.totalDiscs!.toString()));
     }
     if (musicInfo.composers != null) {
       viewModels.add(MapEntry('Composers', musicInfo.composers!.join(', ')));
